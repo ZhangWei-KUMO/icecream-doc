@@ -1,10 +1,11 @@
-import React, {Children, cloneElement} from 'react';
+import React, { Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import {getChildren} from 'jsonml.js/lib/utils';
-import {Timeline, Alert, Affix} from 'antd';
+import { getChildren } from 'jsonml.js/lib/utils';
+import { Timeline, Alert, Affix } from 'antd';
 import config from '../../../bisheng.config';
+import { onResourceClick } from '../utils/pageListener';
 
 export default class Article extends React.Component {
     static contextTypes = {
@@ -12,8 +13,8 @@ export default class Article extends React.Component {
     };
 
     shouldComponentUpdate(nextProps) {
-        const {location} = this.props;
-        const {location: nextLocation} = nextProps;
+        const { location } = this.props;
+        const { location: nextLocation } = nextProps;
 
         if (nextLocation.pathname === location.pathname) {
             return false;
@@ -21,31 +22,10 @@ export default class Article extends React.Component {
         return true;
     }
 
-    onResourceClick = e => {
-        if (!window.gtag) {
-            return;
-        }
-        const cardNode = e.target.closest('.resource-card');
-        if (cardNode) {
-            window.gtag('event', 'resource', {
-                event_category: 'Download',
-                event_label: cardNode.href,
-            });
-        }
-        if (
-            window.location.href.indexOf('docs/react/recommendation') > 0 &&
-            e.target.matches('.markdown > table td > a[href]')
-        ) {
-            window.gtag('event', 'recommendation', {
-                event_category: 'Click',
-                event_label: e.target.href,
-            });
-        }
-    };
 
     getArticle(article) {
-        const {content} = this.props;
-        const {meta} = content;
+        const { content } = this.props;
+        const { meta } = content;
         if (!meta.timeline) {
             return article;
         }
@@ -69,28 +49,28 @@ export default class Article extends React.Component {
     }
 
     render() {
-        const {props} = this;
-        const {content} = props;
-        const {meta, description} = content;
-        const {title, subtitle, filename} = meta;
+        const { props } = this;
+        const { content } = props;
+        const { meta, description } = content;
+        const { title, subtitle, filename } = meta;
         const {
-            intl: {locale},
+            intl: { locale },
         } = this.context;
         const isNotTranslated = locale === 'en-US' && typeof title === 'object';
         return (
             <DocumentTitle title={`${title[locale] || title} - ` + config.baseConfig.projectName}>
                 {/* eslint-disable-next-line */}
-                <article className="markdown" onClick={this.onResourceClick}>
+                <article className="markdown" onClick={(e) => onResourceClick(e)}>
                     {isNotTranslated && (
                         <Alert
                             type="warning"
                             message={
                                 <span>
-                  This article has not been translated yet. Wanna help us out?&nbsp;
+                                    This article has not been translated yet. Wanna help us out?&nbsp;
                                     <a href="https://github.com/ant-design/ant-design/issues/1471">
-                    See this issue on GitHub.
+                                        See this issue on GitHub.
                   </a>
-                </span>
+                                </span>
                             }
                         />
                     )}
@@ -102,18 +82,19 @@ export default class Article extends React.Component {
                     {!description
                         ? null
                         : props.utils.toReactComponent(
-                            ['section', {className: 'markdown'}].concat(getChildren(description)),
+                            ['section', { className: 'markdown' }].concat(getChildren(description)),
                         )}
                     {!content.toc || content.toc.length <= 1 || meta.toc === false ? null : (
                         <Affix className="toc-affix" offsetTop={16}>
+                            <h1>-----</h1>
                             {props.utils.toReactComponent(
-                                ['ul', {className: 'toc'}].concat(getChildren(content.toc)),
+                                ['ul', { className: 'toc' }].concat(getChildren(content.toc)),
                             )}
                         </Affix>
                     )}
                     {this.getArticle(
                         props.utils.toReactComponent(
-                            ['section', {className: 'markdown'}].concat(getChildren(content.content)),
+                            ['section', { className: 'markdown' }].concat(getChildren(content.content)),
                         ),
                     )}
                     {props.utils.toReactComponent(

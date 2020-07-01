@@ -9,60 +9,13 @@ import Article from './Article';
 import PrevAndNext from './PrevAndNext';
 import Footer from '../Layout/Footer';
 import ComponentDoc from './ComponentDoc';
-import * as utils from '../utils';
+import getModuleData from '../utils/getModuleData';
 import 'antd/dist/antd.css';
+import * as utils from '../utils';
+import { getActiveMenuItem, fileNameToPath, getSideBarOpenKeys } from '../utils/handleMenu';
+import { handleInitialHashOnLoad } from '../utils/pageListener';
 
 const { SubMenu } = Menu;
-
-function getActiveMenuItem(props) {
-    let { children } = props.params;
-    children = children.indexOf('.html') > 0 ? children.replace('.html', '-cn') : children;
-    return (
-        (children && children.replace('-cn', '')) || props.location.pathname.replace(/(^\/|-cn$)/g, '')
-    );
-}
-// 获取模块属性
-function getModuleData(props) {
-    let { pathname } = props.location;
-
-    pathname = pathname.indexOf('.html') > 0 ? pathname.replace('.html', '-cn') : pathname;
-
-    const moduleName = /^\/?components/.test(pathname)
-        ? 'components'
-        : pathname
-            .split('/')
-            .filter(item => item)
-            .slice(0, 2)
-            .join('/');
-    const moduleData =
-        moduleName === 'components' ||
-            moduleName === 'docs/react'
-            ? [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog]
-            : props.picked[moduleName];
-
-    const excludedSuffix = utils.isZhCN(pathname) ? 'en-US.md' : 'zh-CN.md';
-
-    return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
-}
-
-function fileNameToPath(filename) {
-    const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
-    return snippets[snippets.length - 1];
-}
-
-//获取左侧主菜单栏索引值
-const getSideBarOpenKeys = nextProps => {
-    // 获取主题配置对象
-    const { themeConfig } = nextProps;
-    const { pathname } = nextProps.location;
-    // 确定当前文件是的语言版本是zh-CN还是en-US
-    const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
-    const moduleData = getModuleData(nextProps);
-    const shouldOpenKeys = utils
-        .getMenuItems(moduleData, locale, themeConfig.categoryOrder, themeConfig.typeOrder)
-        .map(m => (m.title && m.title[locale]) || m.title);
-    return shouldOpenKeys;
-};
 
 export default class MainContent extends Component {
     static contextTypes = {
@@ -71,14 +24,16 @@ export default class MainContent extends Component {
     };
 
     state = {
-        // 当前页面的哈希位置
         openKeys: undefined,
     };
 
     componentDidMount() {
-        window.removeEventListener('load', this.handleInitialHashOnLoad);
         this.componentDidUpdate();
         window.addEventListener('load', this.handleInitialHashOnLoad);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('load', this.handleInitialHashOnLoad);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -158,20 +113,7 @@ export default class MainContent extends Component {
     handleMenuOpenChange = openKeys => {
         this.setState({ openKeys });
     };
-    //页面加载后监听当前URL是否存储hash索引值
-    handleInitialHashOnLoad = () => {
-        setTimeout(() => {
-            if (!window.location.hash) {
-                return;
-            }
-            const element = document.getElementById(
-                decodeURIComponent(window.location.hash.replace('#', '')),
-            );
-            if (element && document.documentElement.scrollTop === 0) {
-                element.scrollIntoView();
-            }
-        }, 0);
-    };
+
     // 绑定菜单滚动
     bindScroller() {
         if (this.scroller) {
