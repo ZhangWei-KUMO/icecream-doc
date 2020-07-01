@@ -2051,6 +2051,21 @@ bisheng-plugin-antd@^1.0.1:
     react-sublime-video "^0.2.0"
     sylvanas "^0.4.2"
 
+bisheng-plugin-codebox@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npm.taobao.org/bisheng-plugin-codebox/download/bisheng-plugin-codebox-0.1.1.tgz#2211260cb19c716e7407abafe29fee3e8372bcdc"
+  integrity sha1-IhEmDLGccW50B6uv4p/uPoNyvNw=
+  dependencies:
+    "@babel/core" "^7.0.0"
+    "@babel/generator" "^7.0.0"
+    "@babel/plugin-proposal-class-properties" "^7.0.0"
+    "@babel/plugin-proposal-decorators" "^7.1.6"
+    "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
+    "@babel/preset-env" "^7.0.0"
+    "@babel/preset-react" "^7.0.0"
+    "@babel/traverse" "^7.0.0"
+    "@babel/types" "^7.0.0"
+
 bisheng-plugin-react@^1.0.0, bisheng-plugin-react@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/bisheng-plugin-react/download/bisheng-plugin-react-1.1.1.tgz#71f10ecdc59f397538f6db8c7caeea1cf74a19f9"

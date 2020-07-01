@@ -6,7 +6,7 @@ const contentTmpl = './template/Content/index';
 function pickerGenerator(module) {
     const tester = new RegExp(`^docs/${module}`);
     return markdownData => {
-        const {filename} = markdownData.meta;
+        const { filename } = markdownData.meta;
         if (tester.test(filename) && !/\/demo$/.test(path.dirname(filename))) {
             return {
                 meta: markdownData.meta,
@@ -25,7 +25,7 @@ module.exports = {
     },
     pick: {
         components(markdownData) {
-            const {filename} = markdownData.meta;
+            const { filename } = markdownData.meta;
             if (!/^components/.test(filename) || /[/\\]demo$/.test(path.dirname(filename))) {
                 return null;
             }
@@ -48,14 +48,17 @@ module.exports = {
     },
     plugins: [
         'bisheng-plugin-description',
+        // 组件可视化
+        'bisheng-plugin-codebox?lang=jsx',
+        // 右侧导航栏
         'bisheng-plugin-toc?maxDepth=2&keepElem',
-        'bisheng-plugin-antd?injectProvider',
-        'bisheng-plugin-react?lang=__react',
+        // 'bisheng-plugin-antd?injectProvider',
+        // 'bisheng-plugin-react?lang=__react',
     ],
     routes: {
         path: '/',
         component: './template/Layout/index',
-        indexRoute: {component: homeTmpl},
+        indexRoute: { component: homeTmpl },
         childRoutes: [
             {
                 path: 'index-cn',

@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'bisheng/router';
-import {Row, Col, Menu, Icon, Affix} from 'antd';
+import { Link } from 'bisheng/router';
+import { Row, Col, Menu, Icon, Affix } from 'antd';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import MobileMenu from 'rc-drawer';
@@ -12,18 +12,18 @@ import ComponentDoc from './ComponentDoc';
 import * as utils from '../utils';
 import 'antd/dist/antd.css';
 
-const {SubMenu} = Menu;
+const { SubMenu } = Menu;
 
 function getActiveMenuItem(props) {
-    let {children} = props.params;
+    let { children } = props.params;
     children = children.indexOf('.html') > 0 ? children.replace('.html', '-cn') : children;
     return (
         (children && children.replace('-cn', '')) || props.location.pathname.replace(/(^\/|-cn$)/g, '')
     );
 }
-
+// 获取模块属性
 function getModuleData(props) {
-    let {pathname} = props.location;
+    let { pathname } = props.location;
 
     pathname = pathname.indexOf('.html') > 0 ? pathname.replace('.html', '-cn') : pathname;
 
@@ -36,13 +36,13 @@ function getModuleData(props) {
             .join('/');
     const moduleData =
         moduleName === 'components' ||
-        moduleName === 'docs/react'
+            moduleName === 'docs/react'
             ? [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog]
             : props.picked[moduleName];
 
     const excludedSuffix = utils.isZhCN(pathname) ? 'en-US.md' : 'zh-CN.md';
 
-    return moduleData.filter(({meta}) => !meta.filename.endsWith(excludedSuffix));
+    return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
 }
 
 function fileNameToPath(filename) {
@@ -51,8 +51,8 @@ function fileNameToPath(filename) {
 }
 
 const getSideBarOpenKeys = nextProps => {
-    const {themeConfig} = nextProps;
-    const {pathname} = nextProps.location;
+    const { themeConfig } = nextProps;
+    const { pathname } = nextProps.location;
     const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
     const moduleData = getModuleData(nextProps);
     const shouldOpenKeys = utils
@@ -87,8 +87,8 @@ export default class MainContent extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const {location} = this.props;
-        const {location: prevLocation = {}} = prevProps || {};
+        const { location } = this.props;
+        const { location: prevLocation = {} } = prevProps || {};
         if (!prevProps || prevLocation.pathname !== location.pathname) {
             this.bindScroller();
         }
@@ -108,9 +108,9 @@ export default class MainContent extends Component {
     }
 
     getMenuItems(footerNavIcons = {}) {
-        const {themeConfig} = this.props;
+        const { themeConfig } = this.props;
         const {
-            intl: {locale},
+            intl: { locale },
         } = this.context;
         const moduleData = getModuleData(this.props);
         const menuItems = utils.getMenuItems(
@@ -128,7 +128,7 @@ export default class MainContent extends Component {
                                 return (
                                     <Menu.ItemGroup title={child.title} key={child.title}>
                                         {child.children
-                                            .sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0))
+                                            // .sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0))
                                             .map(leaf => this.generateMenuItem(false, leaf, footerNavIcons))}
                                     </Menu.ItemGroup>
                                 );
@@ -152,11 +152,11 @@ export default class MainContent extends Component {
         });
         const prev = menuItemsList[activeMenuItemIndex - 1];
         const next = menuItemsList[activeMenuItemIndex + 1];
-        return {prev, next};
+        return { prev, next };
     }
 
     handleMenuOpenChange = openKeys => {
-        this.setState({openKeys});
+        this.setState({ openKeys });
     };
 
     handleInitialHashOnLoad = () => {
@@ -185,7 +185,7 @@ export default class MainContent extends Component {
                 step: '.markdown > h2, .code-box', // required
                 offset: 0,
             })
-            .onStepEnter(({element}) => {
+            .onStepEnter(({ element }) => {
                 [].forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
                     node.className = ''; // eslint-disable-line
                 });
@@ -196,10 +196,10 @@ export default class MainContent extends Component {
             });
     }
 
-    generateMenuItem(isTop, item, {before = null, after = null}) {
+    generateMenuItem(isTop, item, { before = null, after = null }) {
 
         const {
-            intl: {locale},
+            intl: { locale },
         } = this.context;
         const key = fileNameToPath(item.filename);
         if (!item.title) {
@@ -211,10 +211,10 @@ export default class MainContent extends Component {
             : [
                 <span key="english">{title}</span>,
                 <span className="chinese" key="chinese">
-            {item.subtitle}
-          </span>,
+                    {item.subtitle}
+                </span>,
             ];
-        const {disabled} = item;
+        const { disabled } = item;
         const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').toLowerCase();
 
         const child = !item.link ? (
@@ -230,18 +230,18 @@ export default class MainContent extends Component {
                 {after}
             </Link>
         ) : (
-            <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                disabled={disabled}
-                className="menu-item-link-outside"
-            >
-                {before}
-                {text} <Icon type="export"/>
-                {after}
-            </a>
-        );
+                <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    disabled={disabled}
+                    className="menu-item-link-outside"
+                >
+                    {before}
+                    {text} <Icon type="export" />
+                    {after}
+                </a>
+            );
 
         return (
             <Menu.Item key={key.toLowerCase()} disabled={disabled}>
@@ -264,18 +264,18 @@ export default class MainContent extends Component {
     }
 
     render() {
-        const {props} = this;
-        const {isMobile} = this.context;
-        const {openKeys} = this.state;
+        const { props } = this;
+        const { isMobile } = this.context;
+        const { openKeys } = this.state;
         const activeMenuItem = getActiveMenuItem(props);
 
         const menuItems = this.getMenuItems();
         const menuItemsForFooterNav = this.getMenuItems({
-            before: <Icon className="footer-nav-icon-before" type="left"/>,
-            after: <Icon className="footer-nav-icon-after" type="right"/>,
+            before: <Icon className="footer-nav-icon-before" type="left" />,
+            after: <Icon className="footer-nav-icon-after" type="right" />,
         });
-        const {prev, next} = this.getFooterNav(menuItemsForFooterNav, activeMenuItem);
-        const {localizedPageData} = props;
+        const { prev, next } = this.getFooterNav(menuItemsForFooterNav, activeMenuItem);
+        const { localizedPageData } = props;
         const mainContainerClass = classNames('main-container', {
             'main-container-component': !!props.demos,
         });
@@ -296,29 +296,29 @@ export default class MainContent extends Component {
                 <Row>
                     {isMobile ? (
                         <MobileMenu
-                            iconChild={[<Icon type="menu-unfold"/>, <Icon type="menu-fold"/>]}
+                            iconChild={[<Icon type="menu-unfold" />, <Icon type="menu-fold" />]}
                             key="Mobile-menu"
                             wrapperClassName="drawer-wrapper"
                         >
                             {menuChild}
                         </MobileMenu>
                     ) : (
-                        <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
-                            <Affix>
-                                <section className="main-menu-inner">{menuChild}</section>
-                            </Affix>
-                        </Col>
-                    )}
+                            <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
+                                <Affix>
+                                    <section className="main-menu-inner">{menuChild}</section>
+                                </Affix>
+                            </Col>
+                        )}
                     <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
                         <section className={mainContainerClass}>
                             {props.demos ? (
-                                <ComponentDoc {...props} doc={localizedPageData} demos={props.demos}/>
+                                <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} />
                             ) : (
-                                <Article {...props} content={localizedPageData}/>
-                            )}
+                                    <Article {...props} content={localizedPageData} />
+                                )}
                         </section>
-                        <PrevAndNext prev={prev} next={next}/>
-                        <Footer/>
+                        <PrevAndNext prev={prev} next={next} />
+                        <Footer />
                     </Col>
                 </Row>
             </div>
