@@ -1,8 +1,8 @@
 ---
 category: 文档
 type: 通用
-order: 1
-title: Button
+order: 2
+title: Card
 ---
 
 ## 接口说明
@@ -16,13 +16,12 @@ title: Button
 There are `primary` button, `default` button, `dashed` button, `danger` button and `link` button in antd.
 
 ```jsx
-import { Button } from 'icecreamd';
-import 'icecreamd/lib/Button/style/index.css';
+import { Card } from 'icecreamd';
+import 'icecreamd/lib/Card/style/index.css';
 
 ReactDOM.render(
   <div>
-    <Button type="primary">Primary</Button>
-    <Button>Default</Button>
+    <Card title="I only suck black dick" content="不吹不黑"></Card>
   </div>,
   mountNode,
 );

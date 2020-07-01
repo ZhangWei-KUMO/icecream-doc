@@ -65,6 +65,7 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount() {
+    clearTimeout(this.timer);
     const { router } = this.context;
     router.listen(loc => {
       if (typeof window.ga !== 'undefined') {
@@ -83,10 +84,6 @@ export default class Layout extends React.Component {
         nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle);
       }, 0);
     }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
   }
 
   render() {

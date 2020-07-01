@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    devtool: 'inline-source-map',
     source: {
         components: './components',
         docs: './docs',
@@ -8,9 +9,10 @@ module.exports = {
     output: './dist',
     theme: './theme',
     htmlTemplate: path.join(__dirname, './theme/static/template.html'),
+    // 主题配置
     themeConfig: {
         categoryOrder: {
-            配置: 2,
+            前言: 2,
             文档: 100,
         },
         typeOrder: {

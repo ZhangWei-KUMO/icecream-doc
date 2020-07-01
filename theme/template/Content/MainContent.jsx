@@ -50,9 +50,12 @@ function fileNameToPath(filename) {
     return snippets[snippets.length - 1];
 }
 
+//获取左侧主菜单栏索引值
 const getSideBarOpenKeys = nextProps => {
+    // 获取主题配置对象
     const { themeConfig } = nextProps;
     const { pathname } = nextProps.location;
+    // 确定当前文件是的语言版本是zh-CN还是en-US
     const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
     const moduleData = getModuleData(nextProps);
     const shouldOpenKeys = utils
@@ -68,10 +71,12 @@ export default class MainContent extends Component {
     };
 
     state = {
+        // 当前页面的哈希位置
         openKeys: undefined,
     };
 
     componentDidMount() {
+        window.removeEventListener('load', this.handleInitialHashOnLoad);
         this.componentDidUpdate();
         window.addEventListener('load', this.handleInitialHashOnLoad);
     }
@@ -100,11 +105,6 @@ export default class MainContent extends Component {
             // reset menu OpenKeys
             this.handleMenuOpenChange();
         }
-    }
-
-    componentWillUnmount() {
-        this.scroller.destroy();
-        window.removeEventListener('load', this.handleInitialHashOnLoad);
     }
 
     getMenuItems(footerNavIcons = {}) {
@@ -158,7 +158,7 @@ export default class MainContent extends Component {
     handleMenuOpenChange = openKeys => {
         this.setState({ openKeys });
     };
-
+    //页面加载后监听当前URL是否存储hash索引值
     handleInitialHashOnLoad = () => {
         setTimeout(() => {
             if (!window.location.hash) {
@@ -172,32 +172,27 @@ export default class MainContent extends Component {
             }
         }, 0);
     };
-
+    // 绑定菜单滚动
     bindScroller() {
         if (this.scroller) {
             this.scroller.destroy();
         }
         require('intersection-observer'); // eslint-disable-line
-        const scrollama = require('scrollama'); // eslint-disable-line
+        const scrollama = require('scrollama');
         this.scroller = scrollama();
-        this.scroller
-            .setup({
-                step: '.markdown > h2, .code-box', // required
-                offset: 0,
-            })
-            .onStepEnter(({ element }) => {
-                [].forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
-                    node.className = ''; // eslint-disable-line
-                });
-                const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
-                if (currentNode) {
-                    currentNode.className = 'current';
-                }
+        let elements = this.scroller.setup({ step: '.markdown > h2, .code-box', offset: 0 });
+        elements.onStepEnter(({ element }) => {
+            [].forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
+                node.className = ''; // eslint-disable-line
             });
+            const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
+            if (currentNode) {
+                currentNode.className = 'current';
+            }
+        });
     }
-
+    // 生成菜单项
     generateMenuItem(isTop, item, { before = null, after = null }) {
-
         const {
             intl: { locale },
         } = this.context;

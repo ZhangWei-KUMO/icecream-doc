@@ -52,8 +52,8 @@ module.exports = {
         'bisheng-plugin-codebox?lang=jsx',
         // 右侧导航栏
         'bisheng-plugin-toc?maxDepth=2&keepElem',
-        // 'bisheng-plugin-antd?injectProvider',
-        // 'bisheng-plugin-react?lang=__react',
+        'bisheng-plugin-antd?injectProvider',
+        'bisheng-plugin-react?lang=__react',
     ],
     routes: {
         path: '/',

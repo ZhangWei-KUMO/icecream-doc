@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import {FormattedMessage} from 'react-intl';
+
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import {Row, Col, Icon, Affix, Tooltip} from 'antd';
-import {getChildren} from 'jsonml.js/lib/utils';
+import { Row, Col, Icon, Affix, Tooltip } from 'antd';
+import { getChildren } from 'jsonml.js/lib/utils';
 import Demo from './Demo';
 import config from '../../../bisheng.config';
 
-import {ping} from '../utils';
+import { ping } from '../utils';
 
 export default class ComponentDoc extends React.Component {
     static contextTypes = {
         intl: PropTypes.object,
     };
-
     state = {
         expandAll: false,
         showRiddleButton: false,
     };
 
     componentDidMount() {
+        clearTimeout(this.pingTimer);
         this.pingTimer = ping(status => {
             if (status !== 'timeout' && status !== 'error') {
                 this.setState({
@@ -31,10 +32,10 @@ export default class ComponentDoc extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const {location} = this.props;
-        const {location: nextLocation} = nextProps;
-        const {expandAll, showRiddleButton} = this.state;
-        const {expandAll: nextExpandAll, showRiddleButton: nextShowRiddleButton} = nextState;
+        const { location } = this.props;
+        const { location: nextLocation } = nextProps;
+        const { expandAll, showRiddleButton } = this.state;
+        const { expandAll: nextExpandAll, showRiddleButton: nextShowRiddleButton } = nextState;
 
         if (
             nextLocation.pathname === location.pathname &&
@@ -46,26 +47,23 @@ export default class ComponentDoc extends React.Component {
         return true;
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.pingTimer);
-    }
 
     handleExpandToggle = () => {
-        const {expandAll} = this.state;
+        const { expandAll } = this.state;
         this.setState({
             expandAll: !expandAll,
         });
     };
 
     render() {
-        const {props} = this;
-        const {doc, location} = props;
-        const {content, meta} = doc;
+        const { props } = this;
+        const { doc, location } = props;
+        const { content, meta } = doc;
         const {
-            intl: {locale},
+            intl: { locale },
         } = this.context;
         const demos = Object.keys(props.demos).map(key => props.demos[key]);
-        const {expandAll, showRiddleButton} = this.state;
+        const { expandAll, showRiddleButton } = this.state;
 
         const isSingleCol = meta.cols === 1;
         const leftChildren = [];
@@ -97,7 +95,7 @@ export default class ComponentDoc extends React.Component {
         });
 
         const jumper = showedDemo.map(demo => {
-            const {title} = demo.meta;
+            const { title } = demo.meta;
             const localizeTitle = title[locale] || title;
             return (
                 <li key={demo.meta.id} title={localizeTitle}>
@@ -106,7 +104,7 @@ export default class ComponentDoc extends React.Component {
             );
         });
 
-        const {title, subtitle, filename} = meta;
+        const { title, subtitle, filename } = meta;
         const articleClassName = classNames({
             'show-riddle-button': showRiddleButton,
         });
@@ -124,10 +122,10 @@ export default class ComponentDoc extends React.Component {
                             {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
                         </h1>
                         {props.utils.toReactComponent(
-                            ['section', {className: 'markdown'}].concat(getChildren(content)),
+                            ['section', { className: 'markdown' }].concat(getChildren(content)),
                         )}
                         <h2>
-                            <FormattedMessage id="app.component.examples"/>
+                            <FormattedMessage id="app.component.examples" />
                             <Tooltip
                                 title={
                                     <FormattedMessage
