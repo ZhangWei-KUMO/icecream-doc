@@ -38,15 +38,17 @@ export default class Header extends React.Component {
     };
 
     switchLanguage = () => {
-        if (window.language == undefined || window.language == "zh-CN") {
-            window.language = "en-US";
+        const { location, themeConfig } = this.props;
+        let newPathname;
+        if (location.pathname.indexOf('-cn') > -1) {
+            newPathname = location.pathname.replace('-cn', '-en')
         } else {
-            window.language = "zh-CN";
+            newPathname = location.pathname.replace('-en', '-cn')
         }
-        window.location.reload();
+        window.location.href = newPathname
     }
     render() {
-        // const {location, themeConfig} = this.props;
+        // const { location, themeConfig } = this.props;
         //
         // const module = location.pathname
         //     .replace(/(^\/|\/$)/g, '')

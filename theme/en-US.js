@@ -2,6 +2,8 @@
 module.exports = {
   locale: 'en-US',
   messages: {
+    'app.home.slogan': 'A Simple, Easy, Pure',
+    'app.home.slogan.name': 'React Components Library',
     'app.header.search': 'Search...',
     'app.header.menu.home': 'Home',
     'app.header.menu.practice': 'Practice',
@@ -26,7 +28,6 @@ module.exports = {
     'app.demo.codepen': 'Open in CodePen',
     'app.demo.codesandbox': 'Open in CodeSandbox',
     'app.demo.riddle': 'Open in Riddle',
-    'app.home.slogan': "The world's second most popular React UI framework",
     'app.home.introduce':
       'A design system with values of Nature and Determinacy for better user experience of enterprise applications',
     'app.home.design-language': 'Design Language',

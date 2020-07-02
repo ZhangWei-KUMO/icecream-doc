@@ -1,5 +1,8 @@
+/**
+ * 整个毕昇项目的根文件
+ */
 const path = require('path');
-
+// 导入两个页面模板，一个主页，一个文档
 const homeTmpl = './template/Home/index';
 const contentTmpl = './template/Content/index';
 
@@ -17,12 +20,6 @@ function pickerGenerator(module) {
 }
 
 module.exports = {
-    lazyLoad(nodePath, nodeValue) {
-        if (typeof nodeValue === 'string') {
-            return true;
-        }
-        return nodePath.endsWith('/demo');
-    },
     pick: {
         components(markdownData) {
             const { filename } = markdownData.meta;
@@ -58,14 +55,23 @@ module.exports = {
     routes: {
         path: '/',
         component: './template/Layout/index',
-        indexRoute: { component: homeTmpl },
+        indexRoute: { component: homeTmpl },// 根目录是homeTmpl
+        // 设置子路由
         childRoutes: [
             {
                 path: 'index-cn',
                 component: homeTmpl,
             },
             {
+                path: 'index-en',
+                component: homeTmpl,
+            },
+            {
                 path: 'docs/react/:children',
+                component: contentTmpl,
+            },
+            {
+                path: 'docs/english/:children',
                 component: contentTmpl,
             },
             {

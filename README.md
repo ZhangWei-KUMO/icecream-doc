@@ -103,3 +103,37 @@ CMD ["nginx", "-g", "daemon off;"]
 ## 多语言管理
 
 `theme`文件夹负责管理多语言，其中`zh-CN.js`文件为中文模板，`en-US`文件为英文模板。
+
+### Components
+
+React Intl有一组React组件，它们提供了一种声明性的方式来设置i18n上下文并设置日期，数字和字符串的格式，以便在Web UI中显示。这些组件通过基于React Intl的命令式API来渲染React元素。
+
+<Formatted*>声明式组件比起API的方式优势在于：
+
+* 直接在UI上渲染；
+* 像<FormattedMessage>组件可以直接对富文本字符串进行格式化；
+* 像<FormattedRelativeTime>高级组件还可以根据不同的时间进行更新；
+* 支持TypeScript。
+
+在组件中<IntlProvider>是最基础的必须组件，它用于创建整个应用的i18n多语言上下文环境。在参数属性中分为以下几类：
+
+```ts
+interface IntlConfig {
+    locale:string ;// 用户所在地区
+    defaultLocale:string; // 默认地区
+    formats: any; // 格式
+    defaultFormats:any; // 默认格式
+    messsage:Object;  // 开发者自定义的字段对象 
+    timeZone?:string; // 用户所在时区
+    onError:string; // 错误提示
+}
+```
+
+下面是几个实例：
+
+```js
+  // 通过浏览器navigator对象确定用户当前所用语言
+  <IntlProvider locale={navigator.language}>
+    <App importantDate={new Date(1459913574887)} />
+  </IntlProvider>,
+```

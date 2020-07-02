@@ -6,10 +6,9 @@ import 'moment/locale/zh-cn';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import Header from './Header';
-import enLocale from '../../en-US';
-import cnLocale from '../../zh-CN';
+import en_US from '../../en-US';
+import zh_CN from '../../zh-CN';
 import * as utils from '../utils';
-
 if (typeof window !== 'undefined' && navigator.serviceWorker) {
   navigator.serviceWorker.getRegistrations().then(registrations => {
     registrations.forEach(registration => registration.unregister());
@@ -49,7 +48,7 @@ export default class Layout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      appLocale: window.language === 'zh-CN' ? cnLocale : enLocale,
+      appLocale: this.props.location.pathname.indexOf('cn') > -1 ? zh_CN : en_US,
       isMobile,
     };
   }
@@ -60,7 +59,6 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount() {
-    // clearTimeout(this.timer);
     const { router } = this.context;
     router.listen(loc => {
       if (typeof window.ga !== 'undefined') {
@@ -84,7 +82,6 @@ export default class Layout extends React.Component {
   render() {
     const { children, ...restProps } = this.props;
     const { appLocale } = this.state;
-    console.log("appLocale", appLocale)
 
     // Temp remove SentryBoundary
     return (

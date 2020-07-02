@@ -2,6 +2,8 @@
 module.exports = {
     locale: 'zh-CN',
     messages: {
+        'app.home.slogan': '一个朴实无华且枯燥的',
+        'app.home.slogan.name': 'React 组件库',
         'app.header.search': '全文本搜索...',
         'app.header.menu.home': '首页',
         'app.header.menu.practice': '实践',
@@ -26,10 +28,10 @@ module.exports = {
         'app.demo.codepen': '在 CodePen 中打开',
         'app.demo.codesandbox': '在 CodeSandbox 中打开',
         'app.demo.riddle': '在 Riddle 中打开',
-        'app.home.slogan': '一个 UI 设计语言',
         'app.home.introduce':
             '服务于企业级产品的设计体系，基于确定和自然的设计价值观上的模块化解决方案，让设计者和开发者专注于更好的用户体验。',
         'app.home.design-language': '设计语言',
+
         'app.home.solution': '解决方案',
         'app.home.components-explain':
             '基于 Ant Design 设计语言，我们提供了开箱即用的高质量 React 和 Angular 组件实现，用于开发和服务于企业级中后台产品。',
