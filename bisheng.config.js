@@ -26,7 +26,7 @@ module.exports = {
     baseConfig: {
         logo: "https://test-1253763202.cos.ap-shanghai.myqcloud.com/applications/icecream.png",
         projectName: "Icecream Design",
-        homeUrl: "/docs/react/getting-started.html",
+        homeUrl: "/docs/cn/getting-started-cn.html",
         library: "https://github.com/ZhangWei-KUMO/icecreamd"
     }
 };

@@ -61,10 +61,10 @@ server {
 
     location / {
         index index.html;
-        rewrite ^/$ /docs/react/getting-started.html redirect;
+        rewrite ^/$ /docs/en/getting-started.html redirect;
     }
 
-    error_page  500 502 503 504 404 http://api.domain.com/docs/react/getting-started.html;
+    error_page  500 502 503 504 404 http://api.domain.com/docs/en/getting-started.html;
 
 }
 

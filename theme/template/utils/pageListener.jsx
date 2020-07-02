@@ -24,7 +24,7 @@ export const onResourceClick = e => {
     });
   }
   if (
-    window.location.href.indexOf('docs/react/recommendation') > 0 &&
+    window.location.href.indexOf('docs/cn/recommendation') > 0 &&
     e.target.matches('.markdown > table td > a[href]')
   ) {
     window.gtag('event', 'recommendation', {

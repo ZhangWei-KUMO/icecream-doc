@@ -39,7 +39,8 @@ module.exports = {
             return null;
         },
         'docs/pattern': pickerGenerator('pattern'),
-        'docs/react': pickerGenerator('react'),
+        'docs/cn': pickerGenerator('cn'),
+        'docs/en': pickerGenerator('en'),
         'docs/resource': pickerGenerator('resource'),
         'docs/spec': pickerGenerator('spec'),
     },
@@ -67,11 +68,11 @@ module.exports = {
                 component: homeTmpl,
             },
             {
-                path: 'docs/react/:children',
+                path: 'docs/cn/:children',
                 component: contentTmpl,
             },
             {
-                path: 'docs/english/:children',
+                path: 'docs/en/:children',
                 component: contentTmpl,
             },
             {

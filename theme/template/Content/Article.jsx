@@ -8,10 +8,9 @@ import config from '../../../bisheng.config';
 import { onResourceClick } from '../utils/pageListener';
 
 export default class Article extends React.Component {
-    static contextTypes = {
-        intl: PropTypes.object.isRequired,
-    };
-
+    constructor(props) {
+        super(props)
+    }
     shouldComponentUpdate(nextProps) {
         const { location } = this.props;
         const { location: nextLocation } = nextProps;
@@ -25,6 +24,7 @@ export default class Article extends React.Component {
 
     getArticle(article) {
         const { content } = this.props;
+
         const { meta } = content;
         if (!meta.timeline) {
             return article;
@@ -32,14 +32,14 @@ export default class Article extends React.Component {
         const timelineItems = [];
         let temp = [];
         let i = 1;
-        Children.forEach(article.props.children, child => {
-            if (child.type === 'h2' && temp.length > 0) {
-                timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
-                temp = [];
-                i += 1;
-            }
-            temp.push(child);
-        });
+        // Children.forEach(article.props.children, child => {
+        //     if (child.type === 'h2' && temp.length > 0) {
+        //         timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
+        //         temp = [];
+        //         i += 1;
+        //     }
+        //     temp.push(child);
+        // });
         if (temp.length > 0) {
             timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
         }
@@ -49,11 +49,11 @@ export default class Article extends React.Component {
     }
 
     render() {
-        const { content } = this.props;
+        const { content, intl } = this.props;
         const { meta, description } = content;
         const { title, subtitle, filename } = meta;
+        const { locale } = intl;
         // 通过context设置全局语言变量
-        const { intl: { locale } } = this.context;
         const isNotTranslated = locale === 'en-US' && typeof title === 'object';
         return (
             <Fragment>
@@ -85,22 +85,22 @@ export default class Article extends React.Component {
                     </h1>
                     {!description
                         ? null
-                        : props.utils.toReactComponent(
+                        : this.props.utils.toReactComponent(
                             ['section', { className: 'markdown' }].concat(getChildren(description)),
                         )}
                     {!content.toc || content.toc.length <= 1 || meta.toc === false ? null : (
                         <Affix className="toc-affix" offsetTop={16}>
-                            {props.utils.toReactComponent(
+                            {this.props.utils.toReactComponent(
                                 ['ul', { className: 'toc' }].concat(getChildren(content.toc)),
                             )}
                         </Affix>
                     )}
                     {this.getArticle(
-                        props.utils.toReactComponent(
+                        this.props.utils.toReactComponent(
                             ['section', { className: 'markdown' }].concat(getChildren(content.content)),
                         ),
                     )}
-                    {props.utils.toReactComponent(
+                    {this.props.utils.toReactComponent(
                         [
                             'section',
                             {

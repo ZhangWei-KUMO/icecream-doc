@@ -4,6 +4,9 @@ module.exports = {
   messages: {
     'app.home.slogan': 'A Simple, Easy, Pure',
     'app.home.slogan.name': 'React Components Library',
+    'app.header.lang': '中文',
+    'app.btn.doc': 'Document',
+    'app.doc.link': '/docs/en/getting-started',
     'app.header.search': 'Search...',
     'app.header.menu.home': 'Home',
     'app.header.menu.practice': 'Practice',
@@ -14,7 +17,6 @@ module.exports = {
     'app.header.menu.mobile': 'Mobile',
     'app.header.menu.pro.v4': 'Ant Design Pro v4',
     'app.header.menu.ecosystem': 'Ecosystem',
-    'app.header.lang': '中文',
     'app.content.edit-page': 'Edit this page on GitHub!',
     'app.content.edit-demo': 'Edit this demo on GitHub!',
     'app.component.examples': 'Examples',

@@ -45,7 +45,12 @@ export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
 }
 
 export function isZhCN(pathname) {
-  return /-cn\/?$/.test(pathname);
+  if (pathname.indexOf('/cn/') > -1) {
+    return true
+  } else {
+    return false
+  }
+
 }
 
 export function getLocalizedPathname(path, zhCN) {
@@ -86,25 +91,25 @@ export function ping(callback) {
   return setTimeout(() => finish('timeout'), 1500);
 }
 
-export function isLocalStorageNameSupported() {
-  const testKey = 'test';
-  const storage = window.localStorage;
-  try {
-    storage.setItem(testKey, '1');
-    storage.removeItem(testKey);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+// export function isLocalStorageNameSupported() {
+//   const testKey = 'test';
+//   const storage = window.localStorage;
+//   try {
+//     storage.setItem(testKey, '1');
+//     storage.removeItem(testKey);
+//     return true;
+//   } catch (error) {
+//     return false;
+//   }
+// }
 
-export function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-}
+// export function loadScript(src) {
+//   return new Promise((resolve, reject) => {
+//     const script = document.createElement('script');
+//     script.type = 'text/javascript';
+//     script.src = src;
+//     script.onload = resolve;
+//     script.onerror = reject;
+//     document.head.appendChild(script);
+//   });
+// }

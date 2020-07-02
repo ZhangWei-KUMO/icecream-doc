@@ -14,18 +14,18 @@ import 'antd/dist/antd.css';
 import * as utils from '../utils';
 import { getActiveMenuItem, fileNameToPath, getSideBarOpenKeys } from '../utils/handleMenu';
 import { handleInitialHashOnLoad } from '../utils/pageListener';
+import { injectIntl } from 'react-intl';
+import { flattenMenu, getFooterNav, bindScroller } from '../utils/menu';
 
 const { SubMenu } = Menu;
 
-export default class MainContent extends Component {
-    static contextTypes = {
-        intl: PropTypes.object.isRequired,
-        isMobile: PropTypes.bool.isRequired,
-    };
-
-    state = {
-        openKeys: undefined,
-    };
+class MainContent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openKeys: undefined,
+        }
+    }
 
     componentDidMount() {
         this.componentDidUpdate();
@@ -50,7 +50,7 @@ export default class MainContent extends Component {
         const { location } = this.props;
         const { location: prevLocation = {} } = prevProps || {};
         if (!prevProps || prevLocation.pathname !== location.pathname) {
-            this.bindScroller();
+            bindScroller();
         }
         if (!window.location.hash && prevLocation.pathname !== location.pathname) {
             window.scrollTo(0, 0);
@@ -63,10 +63,8 @@ export default class MainContent extends Component {
     }
 
     getMenuItems(footerNavIcons = {}) {
-        const { themeConfig } = this.props;
-        const {
-            intl: { locale },
-        } = this.context;
+        const { themeConfig, intl } = this.props;
+        const { locale } = intl;
         const moduleData = getModuleData(this.props);
         const menuItems = utils.getMenuItems(
             moduleData,
@@ -97,47 +95,14 @@ export default class MainContent extends Component {
         });
     }
 
-    getFooterNav(menuItems, activeMenuItem) {
-        const menuItemsList = this.flattenMenu(menuItems);
-        let activeMenuItemIndex = -1;
-        menuItemsList.forEach((menuItem, i) => {
-            if (menuItem && menuItem.key === activeMenuItem) {
-                activeMenuItemIndex = i;
-            }
-        });
-        const prev = menuItemsList[activeMenuItemIndex - 1];
-        const next = menuItemsList[activeMenuItemIndex + 1];
-        return { prev, next };
-    }
-
     handleMenuOpenChange = openKeys => {
         this.setState({ openKeys });
     };
 
-    // 绑定菜单滚动
-    bindScroller() {
-        if (this.scroller) {
-            this.scroller.destroy();
-        }
-        require('intersection-observer'); // eslint-disable-line
-        const scrollama = require('scrollama');
-        this.scroller = scrollama();
-        let elements = this.scroller.setup({ step: '.markdown > h2, .code-box', offset: 0 });
-        elements.onStepEnter(({ element }) => {
-            [].forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
-                node.className = ''; // eslint-disable-line
-            });
-            const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
-            if (currentNode) {
-                currentNode.className = 'current';
-            }
-        });
-    }
     // 生成菜单项
     generateMenuItem(isTop, item, { before = null, after = null }) {
-        const {
-            intl: { locale },
-        } = this.context;
+        const { intl } = this.props;
+        const { locale } = intl;
         const key = fileNameToPath(item.filename);
         if (!item.title) {
             return null;
@@ -187,19 +152,6 @@ export default class MainContent extends Component {
         );
     }
 
-    flattenMenu(menu) {
-        if (!menu) {
-            return null;
-        }
-        if (menu.type && menu.type.isMenuItem) {
-            return menu;
-        }
-        if (Array.isArray(menu)) {
-            return menu.reduce((acc, item) => acc.concat(this.flattenMenu(item)), []);
-        }
-        return this.flattenMenu((menu.props && menu.props.children) || menu.children);
-    }
-
     render() {
         const { props } = this;
         const { isMobile } = this.context;
@@ -211,7 +163,7 @@ export default class MainContent extends Component {
             before: <Icon className="footer-nav-icon-before" type="left" />,
             after: <Icon className="footer-nav-icon-after" type="right" />,
         });
-        const { prev, next } = this.getFooterNav(menuItemsForFooterNav, activeMenuItem);
+        const { prev, next } = getFooterNav(menuItemsForFooterNav, activeMenuItem);
         const { localizedPageData } = props;
         const mainContainerClass = classNames('main-container', {
             'main-container-component': !!props.demos,
@@ -248,11 +200,7 @@ export default class MainContent extends Component {
                         )}
                     <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
                         <section className={mainContainerClass}>
-                            {props.demos ? (
-                                <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} />
-                            ) : (
-                                    <Article {...props} content={localizedPageData} />
-                                )}
+                            <Article {...props} content={localizedPageData} />
                         </section>
                         <PrevAndNext prev={prev} next={next} />
                         <Footer />
@@ -262,3 +210,5 @@ export default class MainContent extends Component {
         );
     }
 }
+
+export default injectIntl(MainContent);

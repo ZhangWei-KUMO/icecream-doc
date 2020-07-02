@@ -41,9 +41,9 @@ export default class Layout extends React.Component {
     router: PropTypes.object.isRequired,
   };
 
-  static childContextTypes = {
-    isMobile: PropTypes.bool,
-  };
+  // static childContextTypes = {
+  //   isMobile: PropTypes.bool,
+  // };
 
   constructor(props) {
     super(props);
@@ -53,10 +53,10 @@ export default class Layout extends React.Component {
     };
   }
   // 获取子页面信息
-  getChildContext() {
-    const { isMobile: mobile } = this.state;
-    return { isMobile: mobile };
-  }
+  // getChildContext() {
+  //   const { isMobile: mobile } = this.state;
+  //   return { isMobile: mobile, intl: "xxx" };
+  // }
 
   componentDidMount() {
     const { router } = this.context;
@@ -82,13 +82,12 @@ export default class Layout extends React.Component {
   render() {
     const { children, ...restProps } = this.props;
     const { appLocale } = this.state;
-
     // Temp remove SentryBoundary
     return (
       <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
         <ConfigProvider locale={appLocale.locale === 'zh-CN' ? zhCN : null}>
           <div className="page-wrapper">
-            <Header {...restProps} />
+            <Header {...restProps} messages={appLocale.messages} />
             {children}
           </div>
         </ConfigProvider>

@@ -13,13 +13,16 @@ function getModuleData(props) {
       .filter(item => item)
       .slice(0, 2)
       .join('/');
-  const moduleData = moduleName === 'components' || moduleName === 'docs/react' || moduleName === 'docs/english' ?
+  const moduleData = moduleName === 'components' || moduleName === 'docs/cn' || moduleName === 'docs/en' ?
     [...props.picked.components, ...props.picked[moduleName], ...props.picked.changelog]
     : props.picked[moduleName];
 
-  const excludedSuffix = utils.isZhCN(pathname) ? 'en-US.md' : 'zh-CN.md';
+  const excludedSuffix = utils.isZhCN(pathname) ? 'zh-CN.md' : 'en-US.md';
+  console.log("pathname", pathname, excludedSuffix)
 
-  return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
+  const result = moduleData.filter(({ meta }) => meta.filename.endsWith(excludedSuffix));
+
+  return result;
 }
 
 export default getModuleData;
