@@ -1,78 +1,54 @@
-import React from 'react';
-import {injectIntl} from 'react-intl';
-import DocumentTitle from 'react-document-title';
+import React, { Fragment } from 'react';
+import { injectIntl } from 'react-intl';
+import Helmet from 'react-helmet';
+
 import PropTypes from 'prop-types';
+import { Link } from 'bisheng/router';
 import Footer from '../Layout/Footer';
+import { Button } from 'icecreamd';
+import getStyle from '../utils/getStyle';
+import 'icecreamd/lib/Button/style/index.css';
+import config from '../../../bisheng.config';
+// import zh_CN from '../../zh-CN'
+// import en_US from '../../en_US';
 
-// To store style which is only for Home and has conflicts with others.
-function getStyle() {
-    return `
-    .main-wrapper {
-      padding: 0;
-    }
-    #header {
-      box-shadow: none;
-      max-width: 1200px;
-      width: 100%;
-      margin: 20px auto 0;
-      padding: 0 24px;
-    }
-    #header,
-    #header .ant-select-selection,
-    #header .ant-menu {
-      background: transparent;
-    }
-    #header #logo {
-      padding: 0;
-    }
-    #header #nav .ant-menu-item {
-      border-color: transparent;
-    }
-    #header #nav .ant-menu-submenu {
-      border-color: transparent;
-    }
-    #header #nav .ant-menu-item.hide-in-home-page {
-      display: none;
-    }
-    #header .ant-row > div:last-child .header-lang-button {
-      margin-right: 0;
-    }
-    footer .footer-wrap {
-      width: 100%;
-      max-width: 1200px;
-      padding: 86px 24px 93px 24px;
-      margin: auto;
-    }
-    @media only screen and (max-width: 767.99px) {
-      #footer .footer-wrap {
-        padding: 40px 24px;
-      }
-      footer .footer-wrap .ant-row {
-        padding: 0;
-      }
-    }
-  `;
-}
-
-/* eslint-disable react/prefer-stateless-function */
 class Home extends React.Component {
-    static contextTypes = {
-        intl: PropTypes.object.isRequired,
-        isMobile: PropTypes.bool.isRequired,
-    };
+  static contextTypes = {
+    // intl: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+  };
 
-    render() {
-        const {intl} = this.context;
-        return (
-            <DocumentTitle title={`${intl.formatMessage({id: 'app.name'})} - 使用说明`}>
-                <div>
-                    <style dangerouslySetInnerHTML={{__html: getStyle()}}/>
-                    {/* eslint-disable-line */}
-                    <Footer/>
-                </div>
-            </DocumentTitle>
-        );
-    }
+  render() {
+    const { intl } = this.context;
+    console.log(this.props, intl)
+
+    return (
+      <Fragment>
+        <Helmet>
+          <title>{`${config.baseConfig.projectName} - 首页`}</title>
+        </Helmet>
+        <div>
+          <style dangerouslySetInnerHTML={{ __html: getStyle() }} />
+          <div className="container">
+            <img className="home-logo" src={config.baseConfig.logo} />
+            <div className="home">
+              <h1>一个朴实无华且枯燥的 <br /> React组件库</h1>
+              <Link to={config.baseConfig.homeUrl} >
+                <Button type="primary">中文文档</Button>
+              </Link>
+              <Link to={config.baseConfig.homeUrl}  >
+                <Button>English Doc</Button>
+              </Link>
+              <a href={config.baseConfig.library} target="__blank">
+                <Button>Github</Button>
+              </a>
+            </div>
+          </div>
+          <Footer />
+        </div>
+      </Fragment>
+    );
+  }
 }
 
 export default injectIntl(Home);

@@ -37,8 +37,6 @@ if (typeof window !== 'undefined') {
 }
 
 let isMobile = false;
-
-
 export default class Layout extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
@@ -50,22 +48,19 @@ export default class Layout extends React.Component {
 
   constructor(props) {
     super(props);
-    const appLocale = cnLocale;
-    addLocaleData(appLocale.data);
-
     this.state = {
-      appLocale,
+      appLocale: window.language === 'zh-CN' ? cnLocale : enLocale,
       isMobile,
     };
   }
-
+  // 获取子页面信息
   getChildContext() {
     const { isMobile: mobile } = this.state;
     return { isMobile: mobile };
   }
 
   componentDidMount() {
-    clearTimeout(this.timer);
+    // clearTimeout(this.timer);
     const { router } = this.context;
     router.listen(loc => {
       if (typeof window.ga !== 'undefined') {
@@ -77,7 +72,7 @@ export default class Layout extends React.Component {
         window._hmt.push(['_trackPageview', loc.pathname + loc.search]);
       }
     });
-
+    // 顶部渲染进度条
     const nprogressHiddenStyle = document.getElementById('nprogress-style');
     if (nprogressHiddenStyle) {
       this.timer = setTimeout(() => {
@@ -89,6 +84,7 @@ export default class Layout extends React.Component {
   render() {
     const { children, ...restProps } = this.props;
     const { appLocale } = this.state;
+    console.log("appLocale", appLocale)
 
     // Temp remove SentryBoundary
     return (

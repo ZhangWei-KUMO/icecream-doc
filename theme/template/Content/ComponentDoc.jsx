@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import DocumentTitle from 'react-document-title';
+import Helmet from 'react-helmet';
 
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -109,7 +109,13 @@ export default class ComponentDoc extends React.Component {
             'show-riddle-button': showRiddleButton,
         });
         return (
-            <DocumentTitle title={`${subtitle || ''} ${title[locale] || title} - ` + config.baseConfig.projectName}>
+            <Fragment>
+
+                <Helmet>
+                    <title>
+                        {`${subtitle || ''} ${title[locale] || title} - ` + config.baseConfig.projectName}</title>
+                </Helmet>
+
                 <article className={articleClassName}>
                     <Affix className="toc-affix" offsetTop={16}>
                         <ul id="demo-toc" className="toc">
@@ -163,7 +169,8 @@ export default class ComponentDoc extends React.Component {
                         ].concat(getChildren(doc.api || ['placeholder'])),
                     )}
                 </article>
-            </DocumentTitle>
+            </Fragment >
+
         );
     }
 }

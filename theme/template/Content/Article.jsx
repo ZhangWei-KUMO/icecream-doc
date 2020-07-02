@@ -1,7 +1,7 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Children, cloneElement, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import DocumentTitle from 'react-document-title';
+import Helmet from 'react-helmet';
 import { getChildren } from 'jsonml.js/lib/utils';
 import { Timeline, Alert, Affix } from 'antd';
 import config from '../../../bisheng.config';
@@ -49,16 +49,20 @@ export default class Article extends React.Component {
     }
 
     render() {
-        const { props } = this;
-        const { content } = props;
+        const { content } = this.props;
         const { meta, description } = content;
         const { title, subtitle, filename } = meta;
-        const {
-            intl: { locale },
-        } = this.context;
+        // 通过context设置全局语言变量
+        const { intl: { locale } } = this.context;
         const isNotTranslated = locale === 'en-US' && typeof title === 'object';
         return (
-            <DocumentTitle title={`${title[locale] || title} - ` + config.baseConfig.projectName}>
+            <Fragment>
+                <Helmet>
+                    <title>
+                        {`${title[locale] || title} - ` + config.baseConfig.projectName}
+                    </title>
+                </Helmet>
+
                 {/* eslint-disable-next-line */}
                 <article className="markdown" onClick={(e) => onResourceClick(e)}>
                     {isNotTranslated && (
@@ -86,7 +90,6 @@ export default class Article extends React.Component {
                         )}
                     {!content.toc || content.toc.length <= 1 || meta.toc === false ? null : (
                         <Affix className="toc-affix" offsetTop={16}>
-                            <h1>-----</h1>
                             {props.utils.toReactComponent(
                                 ['ul', { className: 'toc' }].concat(getChildren(content.toc)),
                             )}
@@ -106,7 +109,7 @@ export default class Article extends React.Component {
                         ].concat(getChildren(content.api || ['placeholder'])),
                     )}
                 </article>
-            </DocumentTitle>
+            </Fragment>
         );
     }
 }

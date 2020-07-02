@@ -100,3 +100,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 - 如需访问某指定页面可通过，例如：http://api.slowlog.cn/docs/react/sign-rule.html
 
+## 多语言管理
+
+`theme`文件夹负责管理多语言，其中`zh-CN.js`文件为中文模板，`en-US`文件为英文模板。

@@ -22,15 +22,22 @@
     "bisheng-plugin-react": "^1.0.0",
     "bisheng-plugin-toc": "^0.4.4",
     "icecreamd": "^0.4.7-beta",
+    "react-helmet": "6.1.0",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
     "@babel/runtime": "^7.4.4",
     "cross-env": "^5.2.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
     "intersection-observer": "^0.7.0",
     "lz-string": "^1.4.4",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-intl": "^2.9.0",
+    "react-intl": "^4.7.6",
     "rimraf": "^2.6.3",
     "scrollama": "^2.0.0"
   }

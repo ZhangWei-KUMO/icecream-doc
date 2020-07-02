@@ -7,9 +7,7 @@ import config from '../../../bisheng.config'
 class Footer extends React.Component {
     constructor(props) {
         super(props);
-
         this.lessLoaded = false;
-
         this.state = {
             color: '#1890ff',
         };
