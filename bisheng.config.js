@@ -7,15 +7,11 @@ module.exports = {
         config.target = 'node';
         config.externals = ["fs", "child_process", "module"];
         config.optimization.minimize = true;
-        // config.optimization.minimizer.push(
-        //     new TerserPlugin({
-        //         cache: true
-        //     })
-        // );
+
         config.optimization.splitChunks = {
             chunks: 'async',
             minSize: 50000,
-            maxSize: 80000,
+            maxSize: 160000,
             minChunks: 5,
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
@@ -32,7 +28,19 @@ module.exports = {
                     reuseExistingChunk: true
                 }
             }
-        };
+        }
+        config.module.rules.push({
+            test: /\.js$/, use:
+            {
+                loader: 'babel-loader',
+                options:
+                {
+                    presets: [
+                        ['@babel/preset-env'], '@babel/react'
+                    ]
+                }
+            }
+        });
         config.output = {
             filename: "[name].js",
             chunkFilename: '[name].bundle.js',
