@@ -10,8 +10,8 @@ module.exports = {
 
         config.optimization.splitChunks = {
             chunks: 'async',
-            minSize: 50000,
-            maxSize: 160000,
+            minSize: 80000,
+            maxSize: 560000,
             minChunks: 5,
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
@@ -30,7 +30,7 @@ module.exports = {
             }
         }
         config.module.rules.push({
-            test: /\.js$/, use:
+            test: /\.(js|jsx)$/, use:
             {
                 loader: 'babel-loader',
                 options:
