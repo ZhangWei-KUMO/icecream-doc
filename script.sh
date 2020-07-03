@@ -6,8 +6,10 @@ docker stop $name
 docker rm $name
 rm package-lock.json
 rm yarn.lock
+rm -rf dist/
+
+git pull origin master
 yarn
-yarn clean
 yarn prod
 docker build -t $image .
 docker run --name $name -p $port:80 -d $image
