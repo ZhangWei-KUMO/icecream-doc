@@ -9,7 +9,6 @@ rm yarn.lock
 rm -rf dist/
 
 git pull origin master
-yarn
 yarn prod
 docker build -t $image .
 docker run --name $name -p $port:80 -d $image

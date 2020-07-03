@@ -24,7 +24,7 @@ class Home extends Component {
             <div className="home">
               <h1>{messages["app.home.slogan"]} <br /> {messages["app.home.slogan.name"]}</h1>
               <Link to={messages["app.doc.link"]} >
-                <Button type="primary">{messages["app.btn.doc"]}</Button>
+                <Button type="primary">{messages["app.btn.doc"]} Writing now</Button>
               </Link>
               <a href={config.baseConfig.library} target="__blank">
                 <Button>Github</Button>

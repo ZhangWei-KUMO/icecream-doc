@@ -4,7 +4,6 @@ import MainContent from './MainContent';
 const locale = 'en-US'; // 'zh-CN'
 
 export default collect(async nextProps => {
-    console.log(nextProps)
     let { pathname } = nextProps.location;
     const pageDataPath = pathname.split('/');
 

@@ -165,7 +165,6 @@ class MainContent extends Component {
         });
         const { prev, next } = getFooterNav(menuItemsForFooterNav, activeMenuItem);
         const { localizedPageData } = props;
-        console.log("localizedPageData", localizedPageData)
         const mainContainerClass = classNames('main-container', {
             'main-container-component': !!props.demos,
         });
