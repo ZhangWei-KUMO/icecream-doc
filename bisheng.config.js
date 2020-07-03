@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    root: '/icecream',
+    root: '/icecream/',
     devtool: 'inline-source-map',
     source: {
         components: './components',
