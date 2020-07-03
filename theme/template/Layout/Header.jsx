@@ -35,21 +35,21 @@ export default class Header extends React.Component {
 
     switchLanguage = () => {
         const { location, themeConfig } = this.props;
-        let { pathname } = location;
+        let { basename, pathname } = location;
         if (pathname === '/' || pathname === 'index-en') {
-            window.location.href = `/index-cn`;
+            window.location.href = `${basename}index-cn`;
             return;
         }
-        if (pathname === 'index-cn') {
-            window.location.href = `/index-en`;
+        if (/\/?index-cn/.test(pathname)) {
+            window.location.href = `${basename}index-en`;
             return;
         }
-        if (/\/?index-cn/.test(pathname) || /\/?\/cn/.test(pathname)) {
+        if (/\/?\/cn/.test(pathname)) {
             let index = pathname.split('/').pop();
-            window.location.href = `/docs/en/${index}`;
+            window.location.href = `${basename}docs/en/${index}`;
         } else {
             let index = pathname.split('/').pop();
-            window.location.href = `/docs/cn/${index}`;
+            window.location.href = `${basename}docs/cn/${index}`;
         }
 
     }
