@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 image=icecream:0.0.1
 name=icecream
-port=7001
+port=7600
 docker stop $name
 docker rm $name
 rm package-lock.json
