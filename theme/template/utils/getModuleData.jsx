@@ -17,12 +17,10 @@ function getModuleData(props) {
     [...props.picked.components, ...props.picked[moduleName], ...props.picked.changelog]
     : props.picked[moduleName];
 
-  const excludedSuffix = utils.isZhCN(pathname) ? 'zh-CN.md' : 'en-US.md';
-  console.log("pathname", pathname, excludedSuffix)
+  // const excludedSuffix = utils.isZhCN(pathname) ? 'zh-CN.md' : 'en-US.md';
+  // const result = moduleData.filter(({ meta }) => meta.filename.endsWith(excludedSuffix));
 
-  const result = moduleData.filter(({ meta }) => meta.filename.endsWith(excludedSuffix));
-
-  return result;
+  return moduleData;
 }
 
 export default getModuleData;

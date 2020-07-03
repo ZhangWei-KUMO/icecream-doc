@@ -99,7 +99,7 @@ class MainContent extends Component {
         this.setState({ openKeys });
     };
 
-    // 生成菜单项
+    // 生成左侧菜单对象
     generateMenuItem(isTop, item, { before = null, after = null }) {
         const { intl } = this.props;
         const { locale } = intl;
@@ -165,6 +165,7 @@ class MainContent extends Component {
         });
         const { prev, next } = getFooterNav(menuItemsForFooterNav, activeMenuItem);
         const { localizedPageData } = props;
+        console.log("localizedPageData", localizedPageData)
         const mainContainerClass = classNames('main-container', {
             'main-container-component': !!props.demos,
         });

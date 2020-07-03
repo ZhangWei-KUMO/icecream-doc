@@ -34,6 +34,7 @@ export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
       }
     }
   });
+
   return menuItems
     .map(i => {
       if (i.children) {

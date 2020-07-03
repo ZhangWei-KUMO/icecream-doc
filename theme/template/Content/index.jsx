@@ -1,11 +1,10 @@
 import collect from 'bisheng/collect';
 import MainContent from './MainContent';
-import * as utils from '../utils';
-import { useIntl } from 'react-intl';
 
 const locale = 'en-US'; // 'zh-CN'
 
 export default collect(async nextProps => {
+    console.log(nextProps)
     let { pathname } = nextProps.location;
     const pageDataPath = pathname.split('/');
 
@@ -13,7 +12,7 @@ export default collect(async nextProps => {
     if (!pageData) {
         throw 404;
     }
-    const pageDataPromise = pageData[Object.keys(pageData)[0]];
+    // const pageDataPromise = pageData[Object.keys(pageData)[0]];
 
-    return { localizedPageData: pageDataPromise };
+    return { localizedPageData: pageData };
 })(MainContent);

@@ -32,14 +32,14 @@ export default class Article extends React.Component {
         const timelineItems = [];
         let temp = [];
         let i = 1;
-        // Children.forEach(article.props.children, child => {
-        //     if (child.type === 'h2' && temp.length > 0) {
-        //         timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
-        //         temp = [];
-        //         i += 1;
-        //     }
-        //     temp.push(child);
-        // });
+        Children.forEach(article.props.children, child => {
+            if (child.type === 'h2' && temp.length > 0) {
+                timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
+                temp = [];
+                i += 1;
+            }
+            temp.push(child);
+        });
         if (temp.length > 0) {
             timelineItems.push(<Timeline.Item key={i}>{temp}</Timeline.Item>);
         }
