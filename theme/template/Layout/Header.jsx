@@ -9,10 +9,7 @@ import config from '../../../bisheng.config';
 export default class Header extends React.Component {
     static contextTypes = {
         router: PropTypes.object.isRequired,
-        // intl: PropTypes.object.isRequired,
-        // isMobile: PropTypes.bool.isRequired,
     };
-
     state = {
         menuVisible: false,
     };
@@ -20,7 +17,6 @@ export default class Header extends React.Component {
     componentDidMount() {
         // const { intl } = this.context;
         const { router } = this.context;
-
         router.listen(this.handleHideMenu);
         const { searchInput } = this;
         document.addEventListener('keyup', event => {
@@ -39,18 +35,15 @@ export default class Header extends React.Component {
 
     switchLanguage = () => {
         const { location, themeConfig } = this.props;
-        // 如果不存在任何语言注释,则跳转英文首页
-        if (location.pathname.indexOf('-cn') === -1 && location.pathname.indexOf('-en') === -1) {
-            window.location.href = '/index-cn';
-            return;
-        }
-        let newPathname;
-        if (location.pathname.indexOf('-cn') > -1) {
-            newPathname = location.pathname.replace('-cn', '-en');
+        let { pathname } = location;
+        if (/\/?index-cn/.test(pathname) || /\/?\/cn/.test(pathname)) {
+            let index = pathname.split('/').pop();
+            window.location.href = `/docs/en/${index}`;
         } else {
-            newPathname = location.pathname.replace('-en', '-cn')
+            let index = pathname.split('/').pop();
+            window.location.href = `/docs/cn/${index}`;
         }
-        window.location.href = newPathname
+
     }
     render() {
         const headerClassName = classNames({

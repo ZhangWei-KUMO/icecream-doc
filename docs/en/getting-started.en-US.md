@@ -1,7 +1,6 @@
 ---
-category: 文档
-type: 通用
-order: 1
+category: Overview
+order: 0
 title: Getting Started
 ---
 

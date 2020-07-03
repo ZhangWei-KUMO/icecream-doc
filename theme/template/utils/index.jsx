@@ -62,10 +62,10 @@ export function getLocalizedPathname(path, zhCN) {
   if (pathname === '/') {
     return '/index-cn';
   }
-  if (pathname.endsWith('/')) {
-    return pathname.replace(/\/$/, '-cn/');
-  }
-  return `${pathname}-cn`;
+  // if (pathname.endsWith('/')) {
+  //   return pathname.replace(/\/$/, '-cn/');
+  // }
+  return `${pathname}`;
 }
 
 export function ping(callback) {

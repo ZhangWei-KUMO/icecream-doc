@@ -12,7 +12,6 @@ export function flattenMenu(menu) {
 }
 
 export function getFooterNav(menuItems, activeMenuItem) {
-  console.log("xxx", menuItems)
 
   const menuItemsList = flattenMenu(menuItems);
   let activeMenuItemIndex = -1;

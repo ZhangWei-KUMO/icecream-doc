@@ -52,11 +52,6 @@ export default class Layout extends React.Component {
       isMobile,
     };
   }
-  // 获取子页面信息
-  // getChildContext() {
-  //   const { isMobile: mobile } = this.state;
-  //   return { isMobile: mobile, intl: "xxx" };
-  // }
 
   componentDidMount() {
     const { router } = this.context;

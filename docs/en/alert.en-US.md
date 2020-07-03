@@ -1,6 +1,6 @@
 ---
-category: 文档
-type: 通用
+category: Document
+type: Components
 order: 2
 title: Alert
 ---

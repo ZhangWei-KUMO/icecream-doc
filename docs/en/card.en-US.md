@@ -1,8 +1,10 @@
 ---
-category: 文档
-type: 通用
+category: Document
+type: Components
 order: 4
 title: Card
 ---
 
 ## Card
+
+This is good card components

@@ -1,24 +1,18 @@
 ---
 category: 文档
-type: 数据展示
+type: 通用
 order: 1
-title: Alert
+title: Bar
 ---
 
 - 当商户后台、网络、服务器等出现异常，商户系统最终未接收到支付通知；
 - 调用支付接口后，返回系统错误或未知交易状态情况；
 - 调用付款码支付`API`，返回`USERPAYING`的状态；
-- 调用关单或撤销接口`API`之前，需确认支付状态；
-
-## 接口地址
-
 
 ## API 参数
 
-| 参数 | 必填 | 类型 | 长度限制 | 描述 |
-| ---- | ---- | ---- | -------- | ---- |
-| 参数 | 必填 | 类型 | 长度限制 | 描述 |
 
-
-
+```js
+https://api.mch.weixin.qq.com?appKey=Fii6DgbvqWnEm2HYXupl5oaw&sign=b451fb67aa4996d2c08b3567ba3591d3
+``` 
 
