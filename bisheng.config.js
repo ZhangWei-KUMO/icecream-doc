@@ -3,6 +3,42 @@ const path = require('path');
 module.exports = {
     root: '/icecream/',
     devtool: 'inline-source-map',
+    webpackConfig(config) {
+        config.target = 'node';
+        config.externals = ["fs", "child_process", "module"];
+        config.optimization.minimize = true;
+        // config.optimization.minimizer.push(
+        //     new TerserPlugin({
+        //         cache: true
+        //     })
+        // );
+        config.optimization.splitChunks = {
+            chunks: 'async',
+            minSize: 50000,
+            maxSize: 80000,
+            minChunks: 5,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            name: true,
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                }
+            }
+        };
+        config.output = {
+            filename: "[name].js",
+            chunkFilename: '[name].bundle.js',
+        }
+        return config;
+    },
     source: {
         components: './components',
         docs: './docs',
