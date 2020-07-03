@@ -17,17 +17,17 @@
   "dependencies": {
     "antd": "^3.4.2",
     "bisheng": "1.6.1",
+    "icecreamd": "^0.4.7-beta",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "6.1.0"
+  },
+  "devDependencies": {
     "bisheng-plugin-antd": "^1.0.1",
     "bisheng-plugin-codebox": "^0.1.1",
     "bisheng-plugin-react": "^1.0.0",
     "bisheng-plugin-toc": "^0.4.4",
-    "icecreamd": "^0.4.7-beta",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "6.1.0",
-    "typescript": "^3.9.5"
-  },
-  "devDependencies": {
+    "typescript": "^3.9.5",
     "@babel/runtime": "^7.4.4",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",

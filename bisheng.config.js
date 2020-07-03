@@ -1,17 +1,18 @@
 const path = require('path');
+const {
+    WebpackBundleSizeAnalyzerPlugin,
+} = require('webpack-bundle-size-analyzer');
 
 module.exports = {
-    root: '/icecream/',
+    // root: '/icecream/',
+    target: 'node',
     devtool: 'inline-source-map',
     webpackConfig(config) {
-        config.target = 'node';
-        config.externals = ["fs", "child_process", "module"];
         config.optimization.minimize = true;
-
         config.optimization.splitChunks = {
             chunks: 'async',
-            minSize: 80000,
-            maxSize: 560000,
+            minSize: 50000,
+            maxSize: 80000,
             minChunks: 5,
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
@@ -29,6 +30,9 @@ module.exports = {
                 }
             }
         }
+        config.plugins.push(
+            new WebpackBundleSizeAnalyzerPlugin('stats.txt')
+        )
         config.module.rules.push({
             test: /\.(js|jsx)$/, use:
             {
