@@ -47,28 +47,6 @@
 
 <br/>
 
-## Nginx 配置
-<br/>
-
-```bash
-
-server {
-    listen 80;
-
-    server_name api.domain.com;
-
-    root /www/antd-bisheng-docs/dist;
-
-    location / {
-        index index.html;
-        rewrite ^/$ /docs/en/getting-started.html redirect;
-    }
-
-    error_page  500 502 503 504 404 http://api.domain.com/docs/en/getting-started.html;
-
-}
-
-```
 <br/>
 
 ## 使用 Docker 构建此项目
