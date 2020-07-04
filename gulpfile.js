@@ -10,7 +10,7 @@ var fs = require('fs');
 task('compresscss', function (done) {
   src('./dist/*.css')
     .pipe(cssmin())
-    .pipe(gzip({ preExtension: 'gz' }))
+    .pipe(gzip({ append: true }))
     .pipe(dest('./dist/'));
   done()
 });
