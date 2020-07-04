@@ -11,12 +11,13 @@
     {% for cssFile in manifest["css"] %}
     <link rel="stylesheet" type="text/css" href="{{ root }}{{ cssFile }}" />
     {% endfor %}
-    <script src="https://gw.alipayobjects.com/os/lib/es6-shim/0.35.5/??es6-sham.min.js,es6-shim.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/es6-shim/0.35.5/??es6-sham.min.js,es6-shim.min.js" async></script>
     <!--[if lte IE 10]>
     <script src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,media-match/2.0.2/media.match.min.js"></script>
     <![endif]-->
     <script
-        src="https://as.alipayobjects.com/g/component/intl/1.0.1/??Intl.min.js,locale-data/jsonp/en.js,locale-data/jsonp/zh.js"></script>
+        src="https://as.alipayobjects.com/g/component/intl/1.0.1/??Intl.min.js,locale-data/jsonp/en.js,locale-data/jsonp/zh.js"
+        async></script>
 
 </head>
 
@@ -25,7 +26,7 @@
         {{ content | safe }}
     </div>
     {% for jsFile in manifest["js"] %}
-    <script src="{{ root }}{{ jsFile }}"></script>
+    <script src="{{ root }}{{ jsFile }}" async></script>
     {% endfor %}
 </body>
 
