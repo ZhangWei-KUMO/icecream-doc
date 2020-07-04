@@ -13,6 +13,7 @@ module.exports = {
             fs: "empty",
             module: "empty",
             child_process: "empty",
+            net: "empty",
         }
         config.optimization.minimize = true;
         config.optimization.splitChunks = {
