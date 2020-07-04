@@ -24,7 +24,7 @@ task('compresshtml', function (done) {
 
 task('compressjs', function (done) {
   src('./dist/*.js')
-    .pipe(gzip({ preExtension: 'gz' }))
+    .pipe(gzip({ append: true }))
     .pipe(dest('./dist/'));
   done()
 });
