@@ -1,5 +1,5 @@
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 // const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
