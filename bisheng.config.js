@@ -1,12 +1,11 @@
 const path = require('path');
-const {
-    WebpackBundleSizeAnalyzerPlugin,
-} = require('webpack-bundle-size-analyzer');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 // const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 module.exports = {
-    // root: '/icecream/',
+    root: '/icecream/',
     target: 'node',
     devtool: 'inline-source-map',
     webpackConfig(config) {
@@ -39,14 +38,8 @@ module.exports = {
         }
         config.plugins.push(
             new LodashModuleReplacementPlugin(),
-            new WebpackBundleSizeAnalyzerPlugin('stats.txt')
+            //new BundleAnalyzerPlugin()
         )
-        // config.plugins.push(
-        //     new ExtractCssChunks({
-        //         filename: '[name].css',
-        //         chunkFilename: '[id].css',
-        //     })
-        // );
 
         config.module.rules.push({
             loader: 'babel-loader',
