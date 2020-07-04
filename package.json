@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development bisheng start",
-    "prod": "bisheng build && && rm dist/*.js && rm dist/*.css",
+    "prod": "bisheng build && rm dist/*.js && rm dist/*.css",
     "clean": "rimraf dist/*",
     "build": "gulp"
   },
