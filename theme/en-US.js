@@ -2,6 +2,7 @@
 module.exports = {
   locale: 'en-US',
   messages: {
+    'app.home.url': '/icecream/docs/en/getting-started',
     'app.home.slogan': 'A Simple, Easy, Pure',
     'app.home.slogan.name': 'React Components Library',
     'app.header.lang': '中文',
