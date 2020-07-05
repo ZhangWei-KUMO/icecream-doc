@@ -1,9 +1,9 @@
 const path = require('path');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const package = require('./package.json');
+const packa = require('./package.json');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 // const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
-const VERSION = package.version;
+const VERSION = packa.version;
 module.exports = {
     root: '/icecream/',
     target: 'node',

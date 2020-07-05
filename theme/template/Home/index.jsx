@@ -7,7 +7,7 @@ import { Button } from 'icecreamd';
 import getStyle from '../utils/getStyle';
 import 'icecreamd/lib/Button/style/index.css';
 import config from '../../../bisheng.config';
-import package from '../../../package.json';
+import packa from '../../../package.json';
 
 class Home extends Component {
   render() {
@@ -27,7 +27,7 @@ class Home extends Component {
                 <Button type="primary">{messages["app.btn.doc"]} Writing now</Button>
               </Link>
               <a href={config.baseConfig.library} target="__blank">
-                <Button>{package.version} Github</Button>
+                <Button>{packa.version} Github</Button>
               </a>
             </div>
           </div>
