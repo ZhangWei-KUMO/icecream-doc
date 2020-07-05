@@ -1,11 +1,10 @@
 const path = require('path');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const packa = require('./package.json');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-// const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const VERSION = packa.version;
+const ENV = process.env.NODE_ENV;
 module.exports = {
-    root: '/icecream/',
+    root: ENV === 'development' ? '/' : '/icecream',
     target: 'node',
     devtool: 'inline-source-map',
     webpackConfig(config) {
@@ -39,8 +38,18 @@ module.exports = {
         }
         config.plugins.push(
             new LodashModuleReplacementPlugin(),
-            //new BundleAnalyzerPlugin()
         )
+        // if (ENV === 'preview') {
+        //     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+        //     config.plugins.push(
+        //         new LodashModuleReplacementPlugin()
+        //     )
+        //     config.module.rules.push({
+        //         loaders: [
+        //             { test: /\.ejs$/, loader: 'ejs-loader?variable=data' },
+        //         ]
+        //     })
+        // }
 
         config.module.rules.push({
             loader: 'babel-loader',
@@ -48,13 +57,6 @@ module.exports = {
             query: {
                 'plugins': [
                     'lodash',
-                    // [
-                    //     "import",
-                    //     {
-                    //         "libraryName": "antd",
-                    //         "style": true
-                    //     }
-                    // ],
                     ["@babel/plugin-transform-modules-commonjs", {
                         "allowTopLevelThis": false
                     }]
@@ -76,7 +78,6 @@ module.exports = {
     output: './dist',
     theme: './theme',
     htmlTemplate: path.join(__dirname, './theme/static/template.html'),
-    // 主题配置
     themeConfig: {
         categoryOrder: {
             前言: 1,

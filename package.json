@@ -3,13 +3,12 @@
   "version": "0.4.7",
   "description": "This is a document tool based on Icecream Design.",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "cross-env NODE_ENV=development bisheng start",
-    "prod": "bisheng build",
-    "clean": "rimraf dist/*",
-    "build": "gulp",
-    "reduce": "rm dist/*.js && rm dist/*.css"
+    "preview": "cross-env NODE_ENV=preview bisheng start",
+    "build": "rimraf dist/* && bisheng build",
+    "compress": "rimraf dist/* && bisheng build && gulp"
   },
   "keywords": [
     "document"
@@ -68,7 +67,6 @@
     "rimraf": "^2.6.3",
     "scrollama": "^2.0.0",
     "typescript": "^3.9.5",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-bundle-size-analyzer": "^3.1.0"
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
