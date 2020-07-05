@@ -1,9 +1,9 @@
 const path = require('path');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const package = require('./package.json');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 // const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
-
+const VERSION = package.version;
 module.exports = {
     root: '/icecream/',
     target: 'node',
@@ -64,8 +64,8 @@ module.exports = {
         });
 
         config.output = {
-            filename: "[name].js",
-            chunkFilename: '[name].bundle.js',
+            filename: `[name].${VERSION}.js`,
+            chunkFilename: `[name].bundle.${VERSION}.js`,
         }
         return config;
     },
