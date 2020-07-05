@@ -16,9 +16,10 @@ import { getActiveMenuItem, fileNameToPath, getSideBarOpenKeys } from '../utils/
 import { handleInitialHashOnLoad } from '../utils/pageListener';
 import { injectIntl } from 'react-intl';
 import { flattenMenu, getFooterNav, bindScroller } from '../utils/menu';
+import scrollama from 'scrollama';
+const scroller = scrollama();
 
 const { SubMenu } = Menu;
-
 class MainContent extends Component {
     constructor(props) {
         super(props);
@@ -28,6 +29,7 @@ class MainContent extends Component {
     }
 
     componentDidMount() {
+
         this.componentDidUpdate();
         window.addEventListener('load', this.handleInitialHashOnLoad);
     }
@@ -50,18 +52,19 @@ class MainContent extends Component {
         const { location } = this.props;
         const { location: prevLocation = {} } = prevProps || {};
         if (!prevProps || prevLocation.pathname !== location.pathname) {
-            bindScroller();
+            bindScroller(scroller);
         }
         if (!window.location.hash && prevLocation.pathname !== location.pathname) {
             window.scrollTo(0, 0);
         }
-        // when subMenu not equal
         if (get(this.props, 'route.path') !== get(prevProps, 'route.path')) {
-            // reset menu OpenKeys
             this.handleMenuOpenChange();
         }
     }
 
+    componentWillUnmount() {
+        scroller.destroy()
+    }
     getMenuItems(footerNavIcons = {}) {
         const { themeConfig, intl } = this.props;
         const { locale } = intl;

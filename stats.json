@@ -1,0 +1,30 @@
+{
+  "errors": [
+    "Entry module not found: Error: Can't resolve './src' in '/Users/zhangwei/Desktop/icecream-doc'\nresolve './src' in '/Users/zhangwei/Desktop/icecream-doc'\n  using description file: /Users/zhangwei/Desktop/icecream-doc/package.json (relative path: .)\n    Field 'browser' doesn't contain a valid alias configuration\n    using description file: /Users/zhangwei/Desktop/icecream-doc/package.json (relative path: ./src)\n      no extension\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/zhangwei/Desktop/icecream-doc/src doesn't exist\n      .wasm\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/zhangwei/Desktop/icecream-doc/src.wasm doesn't exist\n      .mjs\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/zhangwei/Desktop/icecream-doc/src.mjs doesn't exist\n      .js\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/zhangwei/Desktop/icecream-doc/src.js doesn't exist\n      .json\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/zhangwei/Desktop/icecream-doc/src.json doesn't exist\n      as directory\n        /Users/zhangwei/Desktop/icecream-doc/src doesn't exist"
+  ],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.41.2",
+  "hash": "6f1b66a7a49f2b575fb4",
+  "time": 33,
+  "builtAt": 1593944720545,
+  "publicPath": "",
+  "outputPath": "/Users/zhangwei/Desktop/icecream-doc/dist",
+  "assetsByChunkName": {},
+  "assets": [],
+  "filteredAssets": 0,
+  "entrypoints": {},
+  "namedChunkGroups": {},
+  "chunks": [],
+  "modules": [],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 1,
+      "debug": false
+    }
+  },
+  "children": []
+}

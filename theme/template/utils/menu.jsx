@@ -25,18 +25,21 @@ export function getFooterNav(menuItems, activeMenuItem) {
   return { prev, next };
 }
 
-export function bindScroller() {
-  require('intersection-observer'); // eslint-disable-line
-  const scrollama = require('scrollama');
-  var scroller = scrollama();
+export function bindScroller(scroller) {
   let elements = scroller.setup({ step: '.markdown > h2, .code-box', offset: 0 });
-  elements.onStepEnter(({ element }) => {
-    [].forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
-      node.className = ''; // eslint-disable-line
+  if (elements) {
+    elements.onStepEnter(({ element }) => {
+      if (element) {
+        Array.prototype.forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
+          node.className = '';
+        });
+        const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
+        if (currentNode) {
+          currentNode.className = 'current';
+        }
+      }
+
     });
-    const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
-    if (currentNode) {
-      currentNode.className = 'current';
-    }
-  });
+  }
+
 }

@@ -3,12 +3,11 @@
   "version": "0.4.7",
   "description": "This is a document tool based on Icecream Design.",
   "main": "index.js",
-  "private": false,
+  "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development bisheng start",
-    "preview": "cross-env NODE_ENV=preview bisheng start",
-    "build": "rimraf dist/* && bisheng build",
-    "compress": "rimraf dist/* && bisheng build && gulp"
+    "build": "export NODE_ENV=production && rimraf dist/* && bisheng build",
+    "compress": "export NODE_ENV=production && rimraf dist/* && bisheng build && gulp"
   },
   "keywords": [
     "document"
@@ -23,11 +22,6 @@
     "react-helmet": "6.1.0"
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-cssmin": "^0.2.0",
-    "gulp-gzip": "^1.4.2",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-uglify": "^3.0.2",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -50,7 +44,6 @@
     "cross-env": "^5.2.0",
     "css-loader": "^3.6.0",
     "csso-loader": "^0.3.1",
-    "ejs": "^3.1.3",
     "eslint": "^7.3.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
@@ -58,6 +51,11 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.5",
     "extract-css-chunks-webpack-plugin": "^4.7.5",
+    "gulp": "^4.0.2",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-uglify": "^3.0.2",
     "intersection-observer": "^0.7.0",
     "lodash-webpack-plugin": "^0.11.5",
     "lz-string": "^1.4.4",
@@ -67,6 +65,7 @@
     "rimraf": "^2.6.3",
     "scrollama": "^2.0.0",
     "typescript": "^3.9.5",
-    "webpack-bundle-analyzer": "^3.8.0"
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
