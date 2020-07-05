@@ -36,6 +36,7 @@ export default class Header extends React.Component {
     switchLanguage = () => {
         const { themeConfig } = this.props;
         let { href, basename, pathname } = window.location;
+        console.log("basename", basename, "pathname", pathname)
         if (pathname === '/icecream/') {
             window.location.href = `${href}index-cn`;
             return;

@@ -27,7 +27,7 @@ class Home extends Component {
                 <Button type="primary">{messages["app.btn.doc"]} Writing now</Button>
               </Link>
               <a href={config.baseConfig.library} target="__blank">
-                <Button>{packa.version} Github</Button>
+                <Button>Github beta-{packa.version}</Button>
               </a>
             </div>
           </div>
