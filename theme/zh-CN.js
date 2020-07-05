@@ -2,7 +2,7 @@
 module.exports = {
     locale: 'zh-CN',
     messages: {
-        'app.home.url': '/icecream/docs/cn/getting-started',
+        'app.home.url': '/docs/cn/getting-started',
         'app.home.slogan': '一个朴实无华且枯燥的',
         'app.home.slogan.name': 'React 组件库',
         'app.header.lang': 'English',
