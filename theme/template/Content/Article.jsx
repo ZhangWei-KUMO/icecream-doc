@@ -1,6 +1,5 @@
-import React, { Children, cloneElement, Fragment } from "react";
+import React, { Children, cloneElement } from "react";
 import PropTypes from "prop-types";
-import { FormattedMessage } from "react-intl";
 import Helmet from "react-helmet";
 import { getChildren } from "jsonml.js/lib/utils";
 import { Timeline, Alert, Affix } from "antd";
@@ -58,42 +57,43 @@ export default class Article extends React.Component {
             {`${title[locale] || title} - ${config.baseConfig.projectName}`}
           </title>
         </Helmet>
-
         <article className="markdown" onClick={(e) => onResourceClick(e)}>
-                  {isNotTranslated && (
-            <Alert type="warning" message={(
-              <span>
+          {isNotTranslated && (
+            <Alert
+              type="warning"
+              message={(
+                <span>
                   This article has not been translated yet. Wanna help us out?&nbsp;
-                <a href="https://github.com/ant-design/ant-design/issues/1471">
+                  <a href="https://github.com/ant-design/ant-design/issues/1471">
                     See this issue on GitHub.
                   </a>
                 </span>
               )}
             />
           )}
-                  <h1>
+          <h1>
             {title[locale] || title}
             {!subtitle || locale === "en-US" ? null : <span className="subtitle">{subtitle}</span>}
 
           </h1>
-                  {!description
+          {!description
             ? null
             : this.props.utils.toReactComponent(
               ["section", { className: "markdown" }].concat(getChildren(description))
             )}
-                  {!content.toc || content.toc.length <= 1 || meta.toc === false ? null : (
+          {!content.toc || content.toc.length <= 1 || meta.toc === false ? null : (
             <Affix className="toc-affix" offsetTop={16}>
               {this.props.utils.toReactComponent(
                 ["ul", { className: "toc" }].concat(getChildren(content.toc))
               )}
             </Affix>
           )}
-                  {this.getArticle(
+          {this.getArticle(
             this.props.utils.toReactComponent(
               ["section", { className: "markdown" }].concat(getChildren(content.content))
             )
           )}
-                  {this.props.utils.toReactComponent(
+          {this.props.utils.toReactComponent(
             [
               "section",
               {
@@ -101,7 +101,7 @@ export default class Article extends React.Component {
               }
             ].concat(getChildren(content.api || ["placeholder"]))
           )}
-                </article>
+        </article>
       </>
     );
   }
