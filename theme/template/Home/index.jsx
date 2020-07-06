@@ -11,7 +11,8 @@ import packa from "../../../package.json";
 
 class Home extends PureComponent {
   render() {
-    const { messages } = this.props.intl;
+    const { intl } = this.props;
+    const { messages } = intl;
     return (
       <div>
         <Helmet>
@@ -20,11 +21,23 @@ class Home extends PureComponent {
         <div>
           <style dangerouslySetInnerHTML={{ __html: getStyle() }} />
           <div className="container">
-            <img className="home-logo" src={config.baseConfig.logo} />
+            <img
+              alt="home-logo"
+              className="home-logo"
+              src={config.baseConfig.logo}
+            />
             <div className="home">
-              <h1>{messages["app.home.slogan"]} <br /> {messages["app.home.slogan.name"]}</h1>
+              <h1>
+                {messages["app.home.slogan"]}
+                {" "}
+                <br />
+                {messages["app.home.slogan.name"]}
+              </h1>
               <Link to={messages["app.doc.link"]}>
-                <Button type="primary">{messages["app.btn.doc"]}Writing now</Button>
+                <Button type="primary">
+                  {messages["app.btn.doc"]}
+                  Writing now
+                </Button>
               </Link>
               <a href={config.baseConfig.library} target="__blank">
                 <Button>

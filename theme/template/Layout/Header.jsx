@@ -1,21 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "bisheng/router";
-// import { FormattedMessage } from 'react-intl';
 import classNames from "classnames";
 import { Row, Col } from "antd";
 import config from "../../../bisheng.config";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
+    // eslint-disable-next-line react/static-property-placement
     static contextTypes = {
+      // eslint-disable-next-line react/forbid-prop-types
       router: PropTypes.object.isRequired
-    };
-    state = {
-      menuVisible: false
     };
 
     componentDidMount() {
-      // const { intl } = this.context;
       const { router } = this.context;
       router.listen(this.handleHideMenu);
       const { searchInput } = this;
@@ -26,35 +23,27 @@ export default class Header extends React.Component {
       });
     }
 
-
-    handleHideMenu = () => {
-      this.setState({
-        menuVisible: false
-      });
-    };
-
     switchLanguage = () => {
-      const { themeConfig } = this.props;
-      let { href, basename, pathname } = window.location;
+      const { href, pathname } = window.location;
       if (pathname === "/icecream/") {
         window.location.href = `${href}index-cn`;
         return;
       }
       if (/\/?index-en/.test(pathname)) {
-        let newHref = href.replace("index-en", "index-cn");
+        const newHref = href.replace("index-en", "index-cn");
         window.location.href = newHref;
         return;
       }
       if (/\/?index-cn/.test(pathname)) {
-        let newHref = href.replace("index-cn", "index-en");
+        const newHref = href.replace("index-cn", "index-en");
         window.location.href = newHref;
         return;
       }
       if (/\/?\/cn/.test(pathname)) {
-        let newHref = href.replace("/cn/", "/en/");
+        const newHref = href.replace("/cn/", "/en/");
         window.location.href = newHref;
       } else {
-        let newHref = href.replace("/en/", "/cn/");
+        const newHref = href.replace("/en/", "/cn/");
         window.location.href = newHref;
       }
     }
@@ -75,7 +64,13 @@ export default class Header extends React.Component {
             </Col>
             <Col xxl={20} xl={19} lg={19} md={19} sm={0} xs={0}>
               <div className="tools-bar">
-                <a onClick={this.switchLanguage}>{messages['app.header.lang']}</a>
+                <button
+                  onClick={this.switchLanguage}
+                  tabIndex={0}
+                  type="button"
+                >
+                  {messages["app.header.lang"]}
+                </button>
               </div>
             </Col>
           </Row>
@@ -83,3 +78,5 @@ export default class Header extends React.Component {
       );
     }
 }
+
+export default Header;

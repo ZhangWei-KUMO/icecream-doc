@@ -10,8 +10,8 @@ module.exports = {
   parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-      jsx: true
+      jsx: true,
+      experimentalObjectRestSpread: true
     },
     ecmaVersion: 11,
     sourceType: "module"
@@ -20,6 +20,7 @@ module.exports = {
     "react"
   ],
   rules: {
+    "react/prop-types": 0,
     indent: ["warn", 2],
     "comma-dangle": ["error", "never"],
     semi: ["warn", "always"],

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Link } from "bisheng/router";
 import {
   Row, Col, Menu, Icon, Affix
@@ -142,7 +141,6 @@ class MainContent extends Component {
         >
           {before}
           {text}
-          {" "}
           <Icon type="export" />
           {after}
         </a>
@@ -156,10 +154,10 @@ class MainContent extends Component {
     }
 
     render() {
-      const { props } = this;
+      const { localizedPageData, demos } = this.props;
       const { isMobile } = this.context;
       const { openKeys } = this.state;
-      const activeMenuItem = getActiveMenuItem(props);
+      const activeMenuItem = getActiveMenuItem(this.props);
 
       const menuItems = this.getMenuItems();
       const menuItemsForFooterNav = this.getMenuItems({
@@ -167,9 +165,8 @@ class MainContent extends Component {
         after: <Icon className="footer-nav-icon-after" type="right" />
       });
       const { prev, next } = getFooterNav(menuItemsForFooterNav, activeMenuItem);
-      const { localizedPageData } = props;
       const mainContainerClass = classNames("main-container", {
-        "main-container-component": !!props.demos
+        "main-container-component": !!demos
       });
       const menuChild = (
         <Menu
@@ -203,7 +200,7 @@ class MainContent extends Component {
             )}
             <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
               <section className={mainContainerClass}>
-                <Article {...props} content={localizedPageData} />
+                <Article {...this.props} content={localizedPageData} />
               </section>
               <PrevAndNext prev={prev} next={next} />
               <Footer />

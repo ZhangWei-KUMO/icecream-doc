@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 import collect from "bisheng/collect";
 import MainContent from "./MainContent";
 
