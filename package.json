@@ -20,6 +20,7 @@
     "classnames": "^2.2.6",
     "ejs-compiled-loader": "^3.0.0",
     "icecreamd": "^0.4.7-beta",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "6.1.0",
