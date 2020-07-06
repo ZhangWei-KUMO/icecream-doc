@@ -18,16 +18,16 @@
     "antd": "^3.4.2",
     "bisheng": "1.6.1",
     "classnames": "^2.2.6",
-    "ejs-compiled-loader": "^3.0.0",
     "icecreamd": "^0.4.7-beta",
     "jsonml.js": "^0.1.0",
     "lodash": "^4.17.15",
-    "prop-types": "^15.7.2",
     "rc-drawer": "^4.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "6.1.0",
     "react-intl": "^4.7.6",
+    "react-router": "3.2.4",
+    "react-router-dom": "^5.2.0",
     "scrollama": "^2.0.0"
   },
   "devDependencies": {

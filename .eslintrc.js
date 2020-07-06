@@ -20,6 +20,7 @@ module.exports = {
     "react"
   ],
   rules: {
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "react/prop-types": 0,
     indent: ["warn", 2],
     "comma-dangle": ["error", "never"],

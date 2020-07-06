@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from "react";
-import { Link } from "bisheng/router";
+import { Link } from "react-router";
 import {
   Row, Col, Menu, Icon, Affix
 } from "antd";
@@ -12,7 +13,7 @@ import Article from "./Article";
 import PrevAndNext from "./PrevAndNext";
 import Footer from "../Layout/Footer";
 import getModuleData from "../utils/getModuleData";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import * as utils from "../utils";
 import { getActiveMenuItem, fileNameToPath, getSideBarOpenKeys } from "../utils/handleMenu";
 import { getFooterNav, bindScroller } from "../utils/menu";
@@ -118,32 +119,12 @@ class MainContent extends Component {
         ];
       const { disabled } = item;
       const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, "").toLowerCase();
-
-      const child = !item.link ? (
-        <Link
-          to={utils.getLocalizedPathname(
-            /^components/.test(url) ? `${url}/` : url,
-            locale === "zh-CN"
-          )}
-          disabled={disabled}
-        >
+      const child = (
+        <Link to={url}>
           {before}
           {text}
           {after}
         </Link>
-      ) : (
-        <a
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          disabled={disabled}
-          className="menu-item-link-outside"
-        >
-          {before}
-          {text}
-          <Icon type="export" />
-          {after}
-        </a>
       );
 
       return (

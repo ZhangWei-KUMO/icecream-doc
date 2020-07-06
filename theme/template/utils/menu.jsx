@@ -12,7 +12,6 @@ export function flattenMenu(menu) {
 }
 
 export function getFooterNav(menuItems, activeMenuItem) {
-
   const menuItemsList = flattenMenu(menuItems);
   let activeMenuItemIndex = -1;
   menuItemsList.forEach((menuItem, i) => {
@@ -26,20 +25,18 @@ export function getFooterNav(menuItems, activeMenuItem) {
 }
 
 export function bindScroller(scroller) {
-  let elements = scroller.setup({ step: '.markdown > h2, .code-box', offset: 0 });
+  const elements = scroller.setup({ step: ".markdown > h2, .code-box", offset: 0 });
   if (elements) {
     elements.onStepEnter(({ element }) => {
       if (element) {
-        Array.prototype.forEach.call(document.querySelectorAll('.toc-affix li a'), node => {
-          node.className = '';
+        Array.prototype.forEach.call(document.querySelectorAll(".toc-affix li a"), (node) => {
+          node.className = "";
         });
         const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
         if (currentNode) {
-          currentNode.className = 'current';
+          currentNode.className = "current";
         }
       }
-
     });
   }
-
 }

@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/static-property-placement */
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import { IntlProvider } from "react-intl";
-import "moment/locale/zh-cn";
+// import "moment/locale/zh-cn";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import Header from "./Header";
@@ -24,7 +26,7 @@ if (typeof window !== "undefined") {
   window["react-dom"] = ReactDOM;
   window.antd = require("antd");
 
-  window.addEventListener("error", function onError(e) {
+  window.addEventListener("error", (e) => {
     if (e.message === "ResizeObserver loop limit exceeded") {
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -34,28 +36,18 @@ if (typeof window !== "undefined") {
 
 export default class Layout extends React.Component {
   static contextTypes = {
-    router: PropTypes.object.isRequired
+    // router: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
+    const { location } = this.props;
     this.state = {
-      appLocale: this.props.location.pathname.indexOf("cn") > -1 ? zhCn : enUs
+      appLocale: location.pathname.indexOf("cn") > -1 ? zhCn : enUs
     };
   }
 
   componentDidMount() {
-    const { router } = this.context;
-    router.listen((loc) => {
-      if (typeof window.ga !== "undefined") {
-        window.ga("send", "pageview", loc.pathname + loc.search);
-      }
-      // eslint-disable-next-line no-underscore-dangle
-      if (typeof window._hmt !== "undefined") {
-        // eslint-disable-next-line no-underscore-dangle
-        window._hmt.push(["_trackPageview", loc.pathname + loc.search]);
-      }
-    });
     // 顶部渲染进度条
     const nprogressHiddenStyle = document.getElementById("nprogress-style");
     if (nprogressHiddenStyle) {

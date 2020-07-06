@@ -1,27 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "bisheng/router";
 import classNames from "classnames";
 import { Row, Col } from "antd";
 import config from "../../../bisheng.config";
 
 class Header extends React.Component {
-    // eslint-disable-next-line react/static-property-placement
-    static contextTypes = {
-      // eslint-disable-next-line react/forbid-prop-types
-      router: PropTypes.object.isRequired
-    };
-
-    componentDidMount() {
-      const { router } = this.context;
-      router.listen(this.handleHideMenu);
-      const { searchInput } = this;
-      document.addEventListener("keyup", (event) => {
-        if (event.keyCode === 83 && event.target === document.body) {
-          searchInput.focus();
-        }
-      });
-    }
+  componentDidMount() {
+    const { searchInput } = this;
+    document.addEventListener("keyup", (event) => {
+      if (event.keyCode === 83 && event.target === document.body) {
+        searchInput.focus();
+      }
+    });
+  }
 
     switchLanguage = () => {
       const { href, pathname } = window.location;
@@ -65,6 +56,7 @@ class Header extends React.Component {
             <Col xxl={20} xl={19} lg={19} md={19} sm={0} xs={0}>
               <div className="tools-bar">
                 <button
+                  className="header-switch"
                   onClick={this.switchLanguage}
                   tabIndex={0}
                   type="button"

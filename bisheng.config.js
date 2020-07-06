@@ -1,9 +1,12 @@
+/* eslint-disable no-param-reassign */
 const path = require("path");
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const packa = require("./package.json");
 const { themeConfig, baseConfig } = require("./themeConfig");
 
 const VERSION = packa.version;
 const ENV = process.env.NODE_ENV;
+
 const splitChunks = {
   chunks: "async",
   minSize: 50000,
@@ -39,23 +42,19 @@ const babelConfig = {
     presets: [["@babel/env", { targets: { node: 6 } }]]
   }
 };
-const ejsConfig = {
-  test: /\.ejs$/,
-  loader: "ejs-compiled-loader"
-};
+
 module.exports = {
   root: ENV === "production" ? "/icecream" : "/",
   devtool: "cheap-module-eval-source-map",
-
   webpackConfig(config) {
+    config.node = {
+      fs: "empty",
+      child_process: "empty",
+      net: "empty",
+      module: "empty",
+      ejs: "empty"
+    };
     if (ENV === "production") {
-      const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
-      config.node = {
-        fs: "empty",
-        child_process: "empty",
-        module: "empty",
-        net: "empty"
-      };
       config.optimization.minimize = true;
       config.optimization.splitChunks = splitChunks;
       config.plugins.push(
@@ -67,25 +66,13 @@ module.exports = {
         filename: `[name].${VERSION}.js`,
         chunkFilename: `[name].bundle.${VERSION}.js`
       };
-    } else {
-      const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-      const nodeExternals = require("webpack-node-externals");
-
-      config.node = {
-        fs: "empty",
-        child_process: "empty",
-        net: "empty",
-        module: "empty",
-        ejs: "empty"
-      };
-
-      config.plugins.push(
-        new BundleAnalyzerPlugin()
-      );
-      config.module.rules.push(ejsConfig);
-      // config.externals = [
-      //     nodeExternals()
-      // ];
+      /**
+        * 如果有需要优化包的，可以使用如下代码
+        */
+      // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+      // config.plugins.push(
+      //   new BundleAnalyzerPlugin()
+      // );
     }
 
     return config;

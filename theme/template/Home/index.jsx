@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { PureComponent } from "react";
 import { injectIntl } from "react-intl";
 import Helmet from "react-helmet";
@@ -29,7 +30,6 @@ class Home extends PureComponent {
             <div className="home">
               <h1>
                 {messages["app.home.slogan"]}
-                {" "}
                 <br />
                 {messages["app.home.slogan.name"]}
               </h1>
