@@ -82,7 +82,7 @@ class MainContent extends Component {
                 return (
                   <Menu.ItemGroup title={child.title} key={child.title}>
                     {child.children
-                    // .sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0))
+                      .sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0))
                       .map((leaf) => this.generateMenuItem(false, leaf, footerNavIcons))}
                   </Menu.ItemGroup>
                 );

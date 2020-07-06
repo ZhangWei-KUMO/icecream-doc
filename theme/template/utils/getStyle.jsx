@@ -49,13 +49,15 @@ function getStyle() {
       height:300px
     }
     .container {
-      width:70%;
+      width:80%;
       margin:20px auto;
-      display:flex;
     }
     .container h1 {
       font-size:46px;
       font-weight:300;
+    }
+    .container .home-btns {
+      margin-top:30px
     }
     .home {
       padding:0px 40px;
