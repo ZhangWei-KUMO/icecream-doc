@@ -4,22 +4,25 @@ module.exports = {
     es2020: true
   },
   extends: [
-    'plugin:react/recommended',
-    'airbnb'
+    "plugin:react/recommended",
+    "airbnb"
   ],
-  parser: 'babel-eslint',
+  parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
       jsx: true
     },
     ecmaVersion: 11,
-    sourceType: 'module'
+    sourceType: "module"
   },
   plugins: [
-    'react'
+    "react"
   ],
   rules: {
-    'comma-dangle': ['error', 'never']
+    indent: ["warn", 2],
+    "comma-dangle": ["error", "never"],
+    semi: ["warn", "always"],
+    quotes: ["warn", "double"]
   }
 };
