@@ -6878,10 +6878,10 @@ humanize-url@^1.0.0:
     normalize-url "^1.0.0"
     strip-url-auth "^1.0.0"
 
-icecreamd@^0.4.7-beta:
-  version "0.4.7-beta"
-  resolved "https://registry.npm.taobao.org/icecreamd/download/icecreamd-0.4.7-beta.tgz#f786039f4e057d92f34c69c29ef4f0050d1a995e"
-  integrity sha1-94YDn04FfZLzTGnCnvTwBQ0amV4=
+icecreamd@^0.4.9-beta:
+  version "0.4.9-beta"
+  resolved "https://registry.yarnpkg.com/icecreamd/-/icecreamd-0.4.9-beta.tgz#47250c2a1c3846db4f48a023da81451c5675640f"
+  integrity sha512-v0np1CXaeFNYdKgDDOXzEPlcFtMhXNE/O3szStCJz5B2ltjka3vfwdvAsBm2IIoLmkSNRpk3dBQNLy7UWxm9yg==
   dependencies:
     classnames "^2.2.6"
     less "^3.11.1"

@@ -18,7 +18,7 @@
     "antd": "^3.4.2",
     "bisheng": "1.6.1",
     "classnames": "^2.2.6",
-    "icecreamd": "^0.4.7-beta",
+    "icecreamd": "^0.4.9-beta",
     "jsonml.js": "^0.1.0",
     "lodash": "^4.17.15",
     "rc-drawer": "^4.1.0",
