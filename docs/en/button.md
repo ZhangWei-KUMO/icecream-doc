@@ -12,8 +12,11 @@ import 'icecreamd/lib/Button/style/index.css';
 
 ReactDOM.render(
   <div>
-    <Button type="primary">Primary</Button>
     <Button>Default</Button>
+    <Button type="primary">Primary</Button>
+    <Button type="danger">Error</Button>
+    <Button type="warn">Warn</Button>
+    <Button type="option">Submit</Button>
   </div>,
   mountNode,
 );
@@ -21,6 +24,6 @@ ReactDOM.render(
 
 ## API
 
-|Property|    Description                                |  Type | Default |
-|:-------|:----------------------------------------------|:------|:---|
-|type  |Can be set to `primary` `ghost` `dashed` `danger`|string |  - |
+| Property | Description                                      | Type   | Default |
+| :------- | :----------------------------------------------- | :----- | :------ |
+| type     | Can be set to `primary` `warn` `option` `danger` | string | -       |

@@ -3,7 +3,7 @@ const baseConfig = {
   projectName: "Icecream Design",
   homeUrl: "/docs/cn/getting-started-cn.html",
   library: "https://github.com/ZhangWei-KUMO/icecreamd"
-}
+};
 
 const themeConfig = {
   categoryOrder: {

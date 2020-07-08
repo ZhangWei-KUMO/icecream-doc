@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Link } from "react-router";
 import {
   Row, Col, Menu, Icon, Affix
@@ -9,14 +9,14 @@ import get from "lodash/get";
 import MobileMenu from "rc-drawer";
 import { injectIntl } from "react-intl";
 import scrollama from "scrollama";
-import Article from "./Article";
 import PrevAndNext from "./PrevAndNext";
 import Footer from "../Layout/Footer";
 import getModuleData from "../utils/getModuleData";
-// import "antd/dist/antd.css";
 import * as utils from "../utils";
 import { getActiveMenuItem, fileNameToPath, getSideBarOpenKeys } from "../utils/handleMenu";
 import { getFooterNav, bindScroller } from "../utils/menu";
+
+const Article = React.lazy(() => import("./Article"));
 
 const scroller = scrollama();
 
@@ -180,10 +180,12 @@ class MainContent extends Component {
               </Col>
             )}
             <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
-              <section className={mainContainerClass}>
-                <Article {...this.props} content={localizedPageData} />
-              </section>
-              <PrevAndNext prev={prev} next={next} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <section className={mainContainerClass}>
+                  <Article {...this.props} content={localizedPageData} />
+                </section>
+                <PrevAndNext prev={prev} next={next} />
+              </Suspense>
               <Footer />
             </Col>
           </Row>
