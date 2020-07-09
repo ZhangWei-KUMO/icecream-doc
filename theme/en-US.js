@@ -8,6 +8,6 @@ module.exports = {
     "app.header.lang": "中文",
     "app.btn.doc": "Document",
     "app.doc.link": "/docs/en/getting-started",
-    "app.home.notice": "is writing now"
+    "app.home.notice": ""
   }
 };
