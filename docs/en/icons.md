@@ -24,53 +24,77 @@ import {
 
 ReactDOM.render(
   <Row>
-     <Col span={4}>
-        <GuideBoarder/>
-        <p>GuideBoarder</p>
+     <Col lg={4} md={6} sm={12} xs={12} >
+        <center>
+          <GuideBoarder/>
+          <p>GuideBoarder</p>
+        </center>
       </Col>
-      <Col span={4}>
-        <CheckBoard/>
-         <p>CheckBoard</p>
+      <Col lg={4} md={6} sm={12} xs={12} >
+        <center>
+          <CheckBoard/>
+          <p>CheckBoard</p>
+        </center>
       </Col>
-       <Col span={4}>
+       <Col lg={4} md={6} sm={12} xs={12}>
+        <center>
          <DoubleCheck/>
           <p>DoubleCheck</p>
+         </center>
       </Col>
-       <Col span={4}>
-         <Finance/>
-          <p>Finance</p>
+       <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Finance/>
+            <p>Finance</p>
+          </center>
       </Col>
-       <Col span={4}>
-        <Feedback/>
-         <p>Feedback</p>
+       <Col lg={4} md={6} sm={12} xs={12}>
+         <center>
+            <Feedback/>
+            <p>Feedback</p>
+          </center>
       </Col>
-       <Col span={4}>
-         <Icecream/>
-          <p>Icecream</p>
+       <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Icecream/>
+            <p>Icecream</p>
+          </center>
       </Col>
-      <Col span={4}>
-         <Industry/>
-          <p>Industry</p>
+      <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Industry/>
+            <p>Industry</p>
+          </center>
       </Col>
-      <Col span={4}>
-         <Navigator/>
-          <p>Navigator</p>
+      <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Navigator/>
+            <p>Navigator</p>
+          </center>
       </Col>
-      <Col span={4}>
-         <Rain/>
-          <p>Rain</p>
+      <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Rain/>
+            <p>Rain</p>
+          </center>
       </Col>
-      <Col span={4}>
-         <Thermometer/>
-          <p>Thermometer</p>
+      <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Thermometer/>
+            <p>Thermometer</p>
+          </center>
       </Col>
-      <Col span={4}>
-         <Tools/>
-          <p>Tools</p>
+      <Col lg={4} md={6} sm={12} xs={12}>
+        <center>
+          <Tools/>
+            <p>Tools</p>
+        </center>
       </Col>
-       <Col span={4}>
-         <Wifi/>
-          <p>Wifi</p>
+       <Col lg={4} md={6} sm={12} xs={12}>
+          <center>
+            <Wifi/>
+            <p>Wifi</p>
+          </center>
       </Col>
   </Row>,
   mountNode,
