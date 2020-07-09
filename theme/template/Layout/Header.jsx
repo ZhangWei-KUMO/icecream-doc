@@ -61,7 +61,7 @@ class Header extends React.Component {
                   tabIndex={0}
                   type="button"
                 >
-                  {messages["app.header.lang"]}
+                  {/* {messages["app.header.lang"]} */}
                 </button>
               </div>
             </Col>

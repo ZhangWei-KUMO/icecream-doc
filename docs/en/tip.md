@@ -19,3 +19,9 @@ ReactDOM.render(
   mountNode,
 );
 ```
+
+## API
+
+| Property | Description                   | Type   | Default |
+| :------- | :---------------------------- | :----- | :------ |
+| content  | Can be set the content of Tip | string | -       |
