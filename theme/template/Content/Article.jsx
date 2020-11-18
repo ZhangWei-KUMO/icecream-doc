@@ -4,6 +4,9 @@ import { getChildren } from "jsonml.js/lib/utils";
 import { Timeline, Alert, Affix } from "antd";
 import config from "../../../bisheng.config";
 import { onResourceClick } from "../utils/pageListener";
+import executeSdk from '../utils/wechat';
+import { updateAppMessageShareData, updateTimelineShareData } from "../utils/share";
+import getModuleData from "../utils/getModuleData";
 
 export default class Article extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -16,6 +19,41 @@ export default class Article extends React.Component {
     return true;
   }
 
+  componentDidMount() {
+    const { content, intl, utils } = this.props;
+    const { meta, description } = content;
+    const { title, subtitle } = meta;
+    const { href } = window.location;
+    const { locale } = intl;
+    if (window.location.host !== "localhost:8000") {
+      executeSdk(href);
+      wx.ready(() => {
+        // 分享文章给朋友
+        updateAppMessageShareData(href, title, config.baseConfig.logo, "");
+        // 分享文章到朋友圈
+        updateTimelineShareData(href, title, config.baseConfig.logo);
+      });
+    }
+  }
+
+  componentDidUpdate(preProps, preState) {
+    if (preProps.content !== this.props.content) {
+      const { content, intl, utils } = this.props;
+      const { meta, description } = content;
+      const { title, subtitle } = meta;
+      const { href } = window.location;
+      const { locale } = intl;
+      if (window.location.host !== "localhost:8000") {
+        executeSdk(href);
+        wx.ready(() => {
+          // 分享文章给朋友
+          updateAppMessageShareData(href, title, config.baseConfig.logo, "");
+          // 分享文章到朋友圈
+          updateTimelineShareData(href, title, config.baseConfig.logo);
+        });
+      }
+    }
+  }
   getArticle(article) {
     const { content } = this.props;
 
@@ -105,6 +143,7 @@ export default class Article extends React.Component {
             ].concat(getChildren(content.api || ["placeholder"]))
           )}
         </article>
+
       </>
     );
   }

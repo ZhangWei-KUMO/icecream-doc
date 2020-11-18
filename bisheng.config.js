@@ -9,7 +9,6 @@ const ENV = process.env.NODE_ENV;
 
 const splitChunks = {
   chunks: "async",
-  minSize: 50000,
   maxSize: 80000,
   minChunks: 5,
   maxAsyncRequests: 5,
@@ -44,8 +43,8 @@ const babelConfig = {
 };
 
 module.exports = {
-  root: ENV === "production" ? "/icecream" : "/",
-  devtool: "cheap-module-eval-source-map",
+  root: ENV === "production" ? "/" : "/",
+  devtool: ENV === "production" ? "cheap-module-source-map" : "cheap-module-eval-source-map",
   webpackConfig(config) {
     config.node = {
       fs: "empty",
@@ -56,29 +55,21 @@ module.exports = {
     };
     if (ENV === "production") {
       config.optimization.minimize = true;
-      config.optimization.splitChunks = splitChunks;
+      // config.optimization.splitChunks = splitChunks;
       config.plugins.push(
         new LodashModuleReplacementPlugin()
       );
       config.module.rules.push(babelConfig);
 
       config.output = {
-        filename: `[name].${VERSION}.js`,
-        chunkFilename: `[name].bundle.${VERSION}.js`
+        filename: `${VERSION}.js`,
+        chunkFilename: `bundle.${VERSION}.js`
       };
-      /**
-        * 如果有需要优化包的，可以使用如下代码
-        */
-      // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-      // config.plugins.push(
-      //   new BundleAnalyzerPlugin()
-      // );
     }
 
     return config;
   },
   source: {
-    components: "./components",
     docs: "./docs"
   },
   output: "./dist",

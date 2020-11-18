@@ -49,8 +49,9 @@ function getStyle() {
       height:300px
     }
     .container {
-      width:80%;
-      margin:20px auto;
+      width:70%;
+      margin:120px auto;
+  
     }
     .container h1 {
       font-size:46px;

@@ -4,12 +4,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { IntlProvider } from "react-intl";
-// import "moment/locale/zh-cn";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 import Header from "./Header";
-import enUs from "../../en-US";
 import zhCn from "../../zh-CN";
+
 
 if (typeof window !== "undefined" && navigator.serviceWorker) {
   navigator.serviceWorker.getRegistrations().then((registrations) => {
@@ -41,13 +40,14 @@ export default class Layout extends React.Component {
 
   constructor(props) {
     super(props);
-    const { location } = this.props;
     this.state = {
-      appLocale: location.pathname.indexOf("cn") > -1 ? zhCn : enUs
+      // 设置默认语言
+      appLocale: zhCn
     };
   }
 
   componentDidMount() {
+
     // 顶部渲染进度条
     const nprogressHiddenStyle = document.getElementById("nprogress-style");
     if (nprogressHiddenStyle) {
@@ -55,6 +55,7 @@ export default class Layout extends React.Component {
         nprogressHiddenStyle.parentNode.removeChild(nprogressHiddenStyle);
       }, 0);
     }
+
   }
 
   render() {
