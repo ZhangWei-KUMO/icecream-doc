@@ -47,7 +47,6 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount() {
-
     // 顶部渲染进度条
     const nprogressHiddenStyle = document.getElementById("nprogress-style");
     if (nprogressHiddenStyle) {

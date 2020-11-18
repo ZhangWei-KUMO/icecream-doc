@@ -1,8 +1,8 @@
 module.exports = {
   locale: "zh-CN",
   messages: {
-    "app.home.url": "/docs/schedule",
-    "app.home.link": "/docs/introduction/getting_started",
+    "app.home.url": "/",
+    "app.home.link": "/docs/getting_started",
     "app.home.slogan": "一个简单、且纯洁的",
     "app.home.introduce": "文档网站生成框架",
     "app.btn.doc": "点击进入",
