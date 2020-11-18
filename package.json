@@ -1,7 +1,7 @@
 {
-  "name": "probability",
-  "version": "0.1.0",
-  "description": "probability",
+  "name": "docweb",
+  "version": "0.1.1",
+  "description": "a website frame for markdown documents",
   "main": "index.js",
   "private": true,
   "sideEffects": false,
