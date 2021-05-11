@@ -22,7 +22,7 @@
     "classnames": "^2.2.6",
     "icecreamd": "^0.4.14-beta",
     "jsonml.js": "^0.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "rc-drawer": "^4.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
